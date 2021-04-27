@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "van-search": "/components/dist/search/index",
+    "van-loading": "/components/dist/loading/index",
+    "van-image": "/components/dist/image/index",
+    "van-popup": "/components/dist/popup/index"
+  },
+
+  "navigationBarTitleText":"Digital Academy"
+}

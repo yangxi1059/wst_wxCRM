@@ -1,0 +1,59 @@
+page {
+    width: 100%;
+    height: 100%;
+    background-color: #212627;
+}
+
+
+.video-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    width: 100%;
+}
+
+
+video {
+    width: 100%;
+    height: 500rpx;
+}
+
+audio {
+    margin: 0 auto;
+}
+
+button {
+    padding: 0;
+}
+
+button::after {
+    border: 1rpx solid transparent;
+}
+
+.close-video-box {
+    width: 60rpx;
+    height: 60rpx;
+    text-align: center;
+    line-height: 60rpx;
+    margin: 100rpx auto 0rpx auto;
+}
+
+.close-video-box image {
+    width: 42rpx;
+    height: 42rpx;
+}
+
+
+.marquee_box {
+    width: 100%;
+    position: relative;
+}
+
+.marquee_text {
+    white-space: nowrap;
+    position: absolute;
+    color: #c32e47;
+    opacity: .8;
+}

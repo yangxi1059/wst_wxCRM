@@ -1,0 +1,17 @@
+{
+  "name": "wst-miniprogram",
+  "version": "1.0.0",
+  "main": "app.js",
+  "dependencies": {
+    "ali-oss": "^6.13.2",
+    "miniprogram-sm-crypto": "^0.1.0",
+    "wx-server-sdk": "^2.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

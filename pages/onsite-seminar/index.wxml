@@ -1,0 +1,212 @@
+<view class="index-page" wx:if="{{!isLoading}}">
+    <view class="swith-box">
+        <view class="swiper-tab">
+            <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">
+                {{onsiteSeminarPage.allSeminars}}
+            </view>
+            <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
+                {{onsiteSeminarPage.signedUpSeminars}}</view>
+        </view>
+        <view class="weui-navbar-slider" style="transform:translateX({{slideOffset}}px);"></view>
+    </view>
+
+
+    <swiper style="width:100%;height:100%;" current="{{currentTab}}" class="swiper-box" duration="300"
+        style="height:{{winHeight - 50}}px" bindchange="bindChange">
+        <swiper-item>
+            <scroll-view bindscrolltolower="myFunction" scroll-y="true" style="height: 100%;">
+                <view class="swiper-lesson">
+                    <view class="swiper-lesson-list {{currentLesson==0 ? 'active' : ''}}" data-current="0"
+                        bindtap="swichLesson">{{onsiteSeminarPage.applicationInProgress}}</view>
+                    <view class="swiper-lesson-list {{currentLesson==1 ? 'active' : ''}}" data-current="1"
+                        bindtap="swichLesson">{{onsiteSeminarPage.applicationClosed}}</view>
+                </view>
+
+                <!-- 报名进行中 -->
+                <view class=" applying" wx:if="{{currentLesson==0}}" wx:for-key="aindex">
+                    <block wx:if="{{activeList.length > 0}}" wx:for="{{activeList}}" wx:key="key">
+                        <view class="apply-box">
+                            <view class="apply-date">{{item.formatSeminarStartTime}}</view>
+                            <block wx:for="{{item.sessionList}}" wx:key="key" wx:for-item="active">
+                                <view class="apply-time-box">
+                                    <view class="apply-time"><text>{{active.sessionTime}}{{active.sessionTime !='' && active.sessionEndTime != '' ? '-' :''}}{{active.sessionEndTime}} (北京时间)</text>
+                                        <view class="shape"></view>
+                                    </view>
+                                    <view class="apply-tip" wx:if="{{active.applyStatus == 'success'}}">
+                                        <view class="shape-cfx">
+                                            <view></view><text>Registered</text>
+                                        </view>
+                                        <view class="shape-sjx"></view>
+                                    </view>
+                                    <view class="apply-tip orange" wx:if="{{active.applyStatus == 'wait'}}">
+                                        <view class="shape-cfx">
+                                            <view></view><text>Waiting List</text>
+                                        </view>
+                                        <view class="shape-sjx"></view>
+                                    </view>
+                                    <image wx:if="{{active.liveStatus == 1 || active.liveStatus == 2}}"
+                                        class="icon-lubo" src="/images/luxiang-black.png"></image>
+                                </view>
+                                <van-collapse accordion value="{{ activeNames }}" bind:change="onChange1"
+                                    class="collapse">
+                                    <van-collapse-item title="{{active.sessionTopic}}" name="{{active.sessionId}}"
+                                        custom-class="collapse-item">
+                                        <view class="skill-box">
+                                            {{active.sessionTopic}}（{{active.needHour}}课时）
+                                        </view>
+                                        <view class="skill-box">
+                                            <view class="skill-title">
+                                                <image src="/images/编组 9@2x.png"></image><text>Content | SWE</text>
+                                            </view>
+                                            <text class="skill-content">{{active.sessionContent}}</text>
+                                        </view>
+                                        <view class="skill-box">
+                                            <view class="skill-title">
+                                                <image src="/images/编组 9@2x.png"></image><text>Speaker | {{active.speaker}}</text>
+                                            </view>
+                                            <text class="skill-content">{{active.speakerIntroduction}}</text>
+                                        </view>
+                                        <view class="skill-box">
+                                            <view class="skill-title">
+                                                <image src="/images/编组 9@2x.png"></image><text>Form/Address</text>
+                                            </view>
+                                            <text class="skill-content">{{active.sessionTypeName}}</text>
+                                        </view>
+                                        <view class="skill-box">
+                                            <view class="skill-title">
+                                                <image src="/images/编组 9@2x.png"></image><text>Deadline</text>
+                                            </view>
+                                            <text class="skill-content">{{item.formatSeminarStartTime}}</text>
+                                        </view>
+                                        <view wx:if="{{active.applyStatus == null}}" class="apply-button" bindtap="lookRepaly">Apply</view>
+                                    </van-collapse-item>
+                                </van-collapse>
+                            </block>
+                        </view>
+                    </block>
+
+                    <view class="limitBox" wx:if="{{!hasLimit && activeList.length > 0}}">
+                        <image class="no-limit-backImg" src="cloud://wallstreettequila-bbpq3.7761-wallstreettequila-bbpq3-1302238256/limit-similar.png" />
+                        <view class="no-limit-text">
+                            <image src="/images/lock.png"></image>
+                            <text>{{onsiteSeminarPage.nolimit}}</text>
+                        </view>
+                    </view>
+                    <view class="no-data" wx:if="{{activeList.length <= 0}}">
+                        <image mode="widthFix" src="/images/no-application.png"></image>
+                        <text>{{onsiteSeminarPage.noData}}</text>
+                    </view>
+                </view>
+
+                <!-- 报名已结束 -->
+                <view class="applied" wx:if="{{currentLesson==1}}">
+                    <block wx:if="{{activeFinishList.length > 0}}" wx:for="{{activeFinishList}}" wx:key="key">
+                        <view class="apply-box">
+                            <view class="apply-date">{{item.formatSeminarStartTime}}</view>
+                            <block wx:for="{{item.sessionList}}" wx:key="key" wx:for-item="active">
+                                <view class="apply-time-box">
+                                    <view class="apply-time"><text>{{active.sessionTime}}{{active.sessionTime !='' && active.sessionEndTime != '' ? '-' :''}}{{active.sessionEndTime}} (北京时间)</text>
+                                        <view class="shape"></view>
+                                    </view>
+                                    <view class="apply-tip" wx:if="{{active.applyStatus == 'success'}}">
+                                        <view class="shape-cfx">
+                                            <view></view><text>Registered</text>
+                                        </view>
+                                        <view class="shape-sjx"></view>
+                                    </view>
+                                    <view class="apply-tip orange" wx:if="{{active.applyStatus == 'wait'}}">
+                                        <view class="shape-cfx">
+                                            <view></view><text>Waiting List</text>
+                                        </view>
+                                        <view class="shape-sjx"></view>
+                                    </view>
+                                    <image wx:if="{{active.liveStatus == 1 || active.liveStatus == 2}}"
+                                        class="icon-lubo" src="/images/luxiang-black.png"></image>
+                                </view>
+                                <van-collapse accordion value="{{ activeFinishNames }}" bind:change="onChange2"
+                                    class="collapse">
+                                    <van-collapse-item title="{{active.sessionTopic}}" name="{{active.sessionId}}"
+                                        custom-class="collapse-item">
+
+                                        <view class="skill-box">
+                                            {{active.sessionTopic}}（{{active.needHour}}课时）
+                                        </view>
+                                        <view class="skill-box">
+                                            <view class="skill-title">
+                                                <image src="/images/编组 9@2x.png"></image><text>Content | SWE</text>
+                                            </view>
+                                            <text class="skill-content">{{active.sessionContent}}</text>
+                                        </view>
+                                        <view class="skill-box">
+                                            <view class="skill-title">
+                                                <image src="/images/编组 9@2x.png"></image><text>Speaker | {{active.speaker}}</text>
+                                            </view>
+                                            <text class="skill-content">{{active.speakerIntroduction}}</text>
+                                        </view>
+                                        <view class="skill-box">
+                                            <view class="skill-title">
+                                                <image src="/images/编组 9@2x.png"></image><text>Form/Address</text>
+                                            </view>
+                                            <view class="replay-box">
+                                                <text class="skill-content">{{active.sessionTypeName}}</text>
+                                                <view class="look-replay"
+                                                    wx:if="{{ active.liveStatus == 1 || active.liveStatus == 2}}"
+                                                    bindtap="lookRepaly">
+                                                    <image class="icon-replay" wx:if="{{active.liveStatus == 2}}"
+                                                        src="/images/look-replay.png"></image>
+                                                    <view wx:if="{{active.liveStatus == 1}}"
+                                                        class="loader-inner line-scale-pulse-out-rapid"
+                                                        style="pointer-events: auto;">
+                                                        <view style="pointer-events: auto;"></view>
+                                                        <view style="pointer-events: auto;"></view>
+                                                        <view style="pointer-events: auto;"></view>
+                                                    </view>
+                                                    <text
+                                                        wx:if="{{active.liveStatus == 2}}">{{onsiteSeminarPage.replay}}</text>
+                                                    <text
+                                                        wx:if="{{active.liveStatus == 1}}">{{onsiteSeminarPage.live}}</text>
+                                                </view>
+                                            </view>
+                                        </view>
+                                        <view class="skill-box">
+                                            <view class="skill-title">
+                                                <image src="/images/编组 9@2x.png"></image><text>Deadline</text>
+                                            </view>
+                                            <text class="skill-content">{{active.formatSeminarStartTime}}</text>
+                                        </view>
+                                    </van-collapse-item>
+                                </van-collapse>
+                            </block>
+                        </view>
+                    </block>
+                    <view class="limitBox" wx:if="{{!hasLimit && activeFinishList.length > 0}}">
+                        <image class="no-limit-backImg" src="cloud://wallstreettequila-bbpq3.7761-wallstreettequila-bbpq3-1302238256/limit-similar.png" />
+                        <view class="no-limit-text">
+                            <image src="/images/lock.png"></image>
+                            <text>{{onsiteSeminarPage.nolimit}}</text>
+                        </view>
+                    </view>
+                    <view class="no-data" wx:if="{{activeFinishList.length <= 0}}">
+                        <image src="/images/no-application.png"></image>
+                        <text>{{onsiteSeminarPage.noData}}</text>
+                    </view>
+                </view>
+            </scroll-view>
+        </swiper-item>
+        <swiper-item>
+            <view>
+                <block wx:if="{{myActivityList.length > 0}}" wx:for="{{myActivityList}}" wx:key="key">
+                    <view class="apply-box"></view>
+                </block>
+                <view class="no-data" wx:if="{{myActivityList.length <= 0}}">
+                    <image src="/images/no-application.png"></image>
+                    <text>{{onsiteSeminarPage.noData}}</text>
+                </view>
+            </view>
+        </swiper-item>
+    </swiper>
+</view>
+
+<view class="loading-box" wx:else>
+    <van-loading size="24px" vertical type="spinner">Loading...</van-loading>
+</view>

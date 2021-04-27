@@ -1,0 +1,154 @@
+<view class="index-page" wx:if="{{!isLoading}}">
+
+    <view class="course-info">
+        <view class="course-text">
+            <image class="mentor-image" src="{{lessonInfo.imgUrl}}" mode="aspectFill"></image>
+            <view class="mentor-text">
+                <view class="mentor-name">{{lessonInfo.lessonMentorName}}</view>
+                <view class="mentor-time">
+                    <image style="width: 30rpx;height: 34rpx;" src="/images/icon-lesson.png"></image>
+                    <text class="mentor-time-value">{{lessonInfo.lessonName}}</text>
+                </view>
+                <view class="mentor-time">
+                    <image style="width: 34rpx;height: 34rpx;" src="/images/icon-time.png"></image>
+                    <text class="mentor-time-value">{{lessonInfo.startTime}}</text>
+                </view>
+            </view>
+        </view>
+
+        <view class="switchNav">
+            <view class="nav-item {{currentNav == 0 ? 'active' : ''}}" data-key="0" bindtap="switchNav">Course Content
+            </view>
+            <view class="nav-item {{currentNav == 1 ? 'active' : ''}}" data-key="1" bindtap="switchNav">About Lead
+                Strategist</view>
+            <view class="weui-navbar-slider" style="transform:translateX({{slideOffset}}px);"></view>
+        </view>
+
+        <view wx:if="{{currentNav == 0}}" class="course-content">{{lessonInfo.lessonIntro}} </view>
+        <view wx:if="{{currentNav == 1}}" class="course-content">{{lessonInfo.mentorIntroduce}} </view>
+
+        <!-- <view class="course-list">
+            <block wx:for="{{lessonInfo.qaArr}}" wx:key="key">
+                <view class="course-list-item">
+                    <view class="course-item-text">
+                        <text space="ensp">{{item.startTime}} ~ {{item.endTime}}</text>
+                    </view>
+                    <block wx:if="{{item.menteeId != menteeId && item.menteeId}}">
+                        <view class="course-btn" style="color: #D45E5C;">满额</view>
+                    </block>
+                    <block wx:else>
+                        <view class="course-btn registered" bindtap="toCancel" data-qid="{{item.qaId}}"
+                            wx:if="{{item.menteeId == menteeId}}">已预约</view>
+                         <view class="course-btn" bindtap="toOrder" data-qid="{{item.qaId}}" wx:else>预约</view>
+                    </block>
+                </view>
+            </block>
+            <view class="course-list-item">
+                <view class="course-item-text">
+                    <text space="ensp">{{lessonInfo.allStartTime}} ~ {{lessonInfo.allEndTime}}</text>
+                </view>
+                <text class="all-box" space="ensp">总结 </text>
+            </view>
+        </view> -->
+
+        <view class="order-time">
+            <block wx:for="{{lessonInfo.qaArr}}" wx:key="key">
+                <block wx:if="{{item.menteeId != menteeId && item.menteeId}}">
+                    <view class="time-box">
+                        <text>{{item.startTime}} - {{item.endTime}}</text>
+                        <text class="order-status">满额</text>
+                    </view>
+                </block>
+                <block wx:elif="{{item.menteeId == menteeId}}">
+                    <view class="time-box">
+                        <text>{{item.startTime}} - {{item.endTime}}</text>
+                        <text class="order-status">已预约</text>
+                    </view>
+                </block>
+                <block wx:else>
+                    <view class="time-box {{currentPeriod == index ? 'check': ''}}" data-index="{{index}}"
+                        bindtap="switchPeriod">
+                        <text>{{item.startTime}} - {{item.endTime}}</text>
+                        <text class="order-status">预约</text>
+                        <image wx:if="{{currentPeriod == index}}" class="check-image" src="/images/duigou.png"></image>
+                    </view>
+                </block>
+            </block>
+
+            <view class="time-box check">
+                <text>{{lessonInfo.allStartTime}} - {{lessonInfo.allEndTime}}</text>
+                <text>总结</text>
+            </view>
+        </view>
+
+        <view class="zoom-key" wx:if="{{lessonInfo.lessonKey && lessonInfo.lessonKey != ''}}">
+            <text bindlongpress="copy" data-copy="{{lessonInfo.lessonKey}}">* Zoom ID：{{lessonInfo.lessonKey}}</text>
+            <text bindlongpress="copy" data-copy="{{lessonInfo.lessonKey}}">长按复制</text>
+        </view>
+    </view>
+
+    <view class="step-box">
+        <view class="course-list-title">
+            <image style="width: 50rpx;height: 38rpx;" src="/images/icon-person.png"></image>
+            <text class="mentor-time-key">预约步骤:</text>
+        </view>
+        <block wx:for="{{4}}" wx:key="*this">
+            <view class="step-box-item">
+                <text class="step-index">STEP {{index+1}}</text>
+                <text class="step-text" wx:if="{{index == 0}}">选择合适的时间段 点“预约”</text>
+                <text class="step-text" wx:if="{{index == 1}}">订阅该小程序消息</text>
+                <text class="step-text" wx:if="{{index == 2}}">开课前12小时内自动推送ZoomID</text>
+                <text class="step-text" wx:if="{{index == 3}}">准时登录Zoom开始Q&A</text>
+            </view>
+            <block wx:if="{{index != 4-1}}">
+                <image class="icon-up" src="/images/icon-step.png"></image>
+            </block>
+        </block>
+    </view>
+
+    <view class="button-box">
+        <view class="button" bindtap="toOrder" >预约</view>
+    </view>
+
+    <view class="step-box">
+        <view class="notice-box-title">
+            <image style="width: 38rpx;height: 38rpx;" src="/images/icon-notice.png"></image>
+            <text class="mentor-time-key">注意事项:</text>
+        </view>
+        <text class="notice">1.若要取消课程请提前12小时，否则将自动记为1次课时。
+            2.每月至多参与2次Q&A，每月1号重置本月课时数。
+            3.请准点准时登录Zoom Room，建议初使者可提前调试设备。
+        </text>
+    </view>
+
+    <van-popup show="{{ showSignup }}" bind:close="subscibe" custom-style="border-radius: 12rpx;">
+        <view class="message-box">
+            <view class="message-content">订阅此课程需花费您 1 课时</view>
+            <view class="message-btn-box">
+                <view bindtap="unSubscibe">取消</view>
+                <view bindtap="subscibe">确定</view>
+            </view>
+        </view>
+    </van-popup>
+
+    <van-popup show="{{ showMessage }}" bind:close="onClose" custom-style="border-radius: 12rpx;">
+        <view class="message-box">
+            <view class="message-content">{{messageContent}}</view>
+            <view class="message-btn" bindtap="onClose">OK</view>
+        </view>
+    </van-popup>
+
+    <van-popup show="{{ showCancleMessage }}" bind:close="cancleMessage" custom-style="border-radius: 12rpx;">
+        <view class="message-box">
+            <view class="message-content">当前已成功报名，确定要取消吗?</view>
+            <view class="message-btn-box">
+                <view bindtap="cancleMessage">暂不</view>
+                <view bindtap="cancel">确定</view>
+            </view>
+        </view>
+    </van-popup>
+</view>
+
+<view class="loading-box" wx:else>
+    <van-loading size="24px" vertical type="spinner">Loading...</van-loading>
+</view>

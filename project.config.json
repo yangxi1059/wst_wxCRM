@@ -1,0 +1,245 @@
+{
+  "description": "项目配置文件",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": false,
+    "uploadWithSourceMap": true,
+    "useMultiFrameRuntime": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "bundle": false,
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "useApiHook": true,
+    "useApiHostProcess": false
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.16.0",
+  "appid": "wx821045779e4dcdb9",
+  "projectname": "crm",
+  "debugOptions": {
+    "hidedInDevtools": []
+  },
+  "isGameTourist": false,
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "search": {
+      "list": []
+    },
+    "conversation": {
+      "list": []
+    },
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "currentL": -1,
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": 0,
+          "name": "pages/mine/my",
+          "pathName": "pages/mine/my",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/application/index",
+          "pathName": "pages/application/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/application/insert/index",
+          "pathName": "pages/application/insert/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/recording-lesson/index",
+          "pathName": "pages/recording-lesson/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/recording-lesson/detail/index",
+          "pathName": "pages/recording-lesson/detail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/recording-lesson/detail/index",
+          "pathName": "pages/recording-lesson/detail/index",
+          "query": "cid=course-2020012100000001&status=bufen&statusName=bufen",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/recording-lesson/detail/index",
+          "pathName": "pages/recording-lesson/detail/index",
+          "query": "cid=course-2020061600000004&status=vip&statusName=vip",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/live-lesson/index",
+          "pathName": "pages/live-lesson/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/book-shelf/play-video/index",
+          "pathName": "pages/book-shelf/play-video/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/sales-situation/index",
+          "pathName": "pages/sales-situation/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 10,
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/application/detail/index",
+          "pathName": "pages/application/detail/index",
+          "query": "applyId=apply-2021012500000001",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/application/new-application/index",
+          "pathName": "pages/application/new-application/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/application/new-application/insert-vacate/index",
+          "pathName": "pages/application/new-application/insert-vacate/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 16,
+          "name": "pages/application/new-application/insert-reimbursement/index",
+          "pathName": "pages/application/new-application/insert-reimbursement/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/application/new-application/insert-vacate/index",
+          "pathName": "pages/application/new-application/insert-vacate/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/application/detail/index",
+          "pathName": "pages/application/detail/index",
+          "query": "applyId=apply-2021012900000002",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/check/detail/index",
+          "pathName": "pages/check/detail/index",
+          "query": "applyId=apply-2021020500000001",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/application/new-application/insert-overtime/index",
+          "pathName": "pages/application/new-application/insert-overtime/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/application/new-application/insert-purchase/index",
+          "pathName": "pages/application/new-application/insert-purchase/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/application/new-application/insert-bonus/index",
+          "pathName": "pages/application/new-application/insert-bonus/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/live-lesson/detail/index",
+          "pathName": "pages/live-lesson/detail/index",
+          "query": "liveId=live-2020122900000001",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/interview-database/index",
+          "pathName": "pages/interview-database/index",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

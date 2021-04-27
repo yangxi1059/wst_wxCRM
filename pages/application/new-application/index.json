@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "van-grid": "/components/dist/grid/index",
+    "van-grid-item": "/components/dist/grid-item/index"
+  
+  },
+  "navigationBarTitleText": "新申请",
+  "navigationBarBackgroundColor":"#407dce",
+  "navigationBarTextStyle": "white"
+}

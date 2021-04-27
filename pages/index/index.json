@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "tui-loadmore": "../../miniprogram_npm/thorui/loadmore/loadmore"
+  },
+  "navigationBarTitleText": "文森特酒屋",
+  "navigationBarBackgroundColor": "#F8F9FA"
+}

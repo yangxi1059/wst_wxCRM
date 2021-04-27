@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "tui-loadmore": "../../miniprogram_npm/thorui/loadmore/loadmore",
+    "tui-nomore": "../../miniprogram_npm/thorui/nomore/nomore"
+  },
+  "navigationBarTitleText": "我的申请",
+  "navigationBarBackgroundColor": "#407dce",
+  "navigationBarTextStyle": "white"
+}

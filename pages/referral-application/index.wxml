@@ -1,0 +1,175 @@
+<view class="index-page" wx:if="{{!isLoading}}">
+    <view class="swith-box">
+        <view class="swiper-tab">
+            <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">
+                {{referralsPage.tabList[0]}}</view>
+            <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
+                {{referralsPage.tabList[1]}}</view>
+        </view>
+        <view class="weui-navbar-slider" style="transform:translateX({{slideOffset}}px);"></view>
+    </view>
+
+    <!-- wx:if="{{hasLimit}}" -->
+    <view class="page-content">
+
+        <view class="search-box" wx:if="{{hasLimit}}">
+            <view class="search-input">
+                <van-search focus value="{{ searchValue }}" shape="round" background="#fff" placeholder="Search"
+                    bind:search="toSearch" bind:clear="clearInput" />
+            </view>
+        </view>
+
+        <view class="application-select" wx:if="{{hasLimit}}">
+            <view class="select-box-half" wx:for="{{selectData}}" wx:key="index" wx:if="{{index < 4}}">
+                <view class="content-box" data-select="{{index}}" bindtap="bindShowMsg">
+                    <text class="select-name {{item.status ? 'selected-name' :''}}">{{item.selectName}}</text>
+                    <image
+                        class="notanslate {{currentSelect == index && iconSelected && select ? 'tanslateImage' : ''}}"
+                        src="/images/jiantou.png"></image>
+                </view>
+                <view class="select-list" wx:if="{{currentSelect == index ? select :''}}">
+                    <view wx:for="{{item.selectList}}" wx:key="unique" wx:for-item="items" wx:for-index="bindex">
+                        <view class="select_one" bindtap="mySelect" data-id="{{index}}" data-aid="{{bindex}}"
+                            data-name="{{items.itemName}}" data-value="{{items.itemValue}}">{{items.itemName}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="select-box" wx:for="{{selectData}}" wx:key="index" wx:if="{{index > 3 && index <= 4}}">
+                <view class="content-boxs" data-select="{{index}}" bindtap="bindShowMsg">
+                    <text class="select-name {{item.status ? 'selected-name' : ''}}">{{item.selectName}}</text>
+                    <image
+                        class="notanslate {{currentSelect == index && iconSelected && select ? 'tanslateImage' : ''}}"
+                        src="/images/jiantou.png"></image>
+                </view>
+                <view class="select-list long" wx:if="{{currentSelect == index ? select :''}}">
+                    <view wx:for="{{item.selectList}}" wx:key="unique" wx:for-item="items" wx:for-index="bindex">
+                        <view class="select_one long" bindtap="mySelect" data-id="{{index}}" data-aid="{{bindex}}"
+                            data-name="{{items.itemName}}" data-value="{{items.itemValue}}">{{items.itemName}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <!-- 排序 -->
+        <view class="order" wx:if="{{hasLimit}}">
+            <view class="order-box" bindtap="showOrder">
+                {{referralsPage.sortName}}：<text>{{referralsPage.sortList[selectOrder]}}</text>
+                <image src="/images/paixu.png"></image>
+            </view>
+            <view class="order-content" wx:if="{{showOrder}}">
+                <block wx:for="{{referralsPage.sortList}}" wx:key="key">
+                    <view bindtap="orderData" data-oid="{{index}}" class="{{selectOrder == index ? '' : 'noactive'}}">
+                        {{item}}
+                    </view>
+                </block>
+            </view>
+        </view>
+
+        <view wx:if="{{currentTab == 0}}" data-current="0" style="padding-bottom: 40rpx;">
+            <view class="application-box" wx:if="{{jobList.length > 0}}" wx:for="{{jobList}}" wx:key="index">
+                <view bindtap="toDetail" data-jid="{{item.jobId}}">
+                    <view wx:if="{{item.menteeCollectCount > 0}}" class="appli-status-save">
+                        <image src="/images/shoucang.png" lazy-load="{{true}}"></image>
+                        <text>已收藏</text>
+                    </view>
+                    <view wx:if="{{item.menteeApplyCount > 0}}" class="appli-status-send">
+                        <image src="/images/send.png" lazy-load="{{true}}"></image>
+                        <text>{{referralsPage.delivered}}</text>
+                    </view>
+                    <view class="appli-area">
+                        <image src="/images/weizhi-tianchong@2x.png" lazy-load="{{true}}"></image>
+                        <text>{{item.cityName}}{{item.countryName != null && item.cityName != null ? ',' : ''}}{{item.countryName}}</text>
+                    </view>
+                    <image mode="aspectFit" class="appli-logo" src="{{item.logo}}" lazy-load="{{true}}"></image>
+                    <text class="appli-content">{{item.jobName}}</text>
+                    <text class="appli-name">{{item.companyName}}</text>
+                    <view class="appli-publish">
+                        <view class="publish-time">
+                            <text class="publish-time-up">{{item.createTime}}</text>
+                            <text class="publish-time-down">{{referralsPage.publish}}</text>
+                        </view>
+                        <view class="line"></view>
+                        <view class="publish-time">
+                            <text class="publish-time-up">{{item.deadLine}}</text>
+                            <text class="publish-time-down">{{referralsPage.deadline}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="limit-box" wx:if="{{hasLimit == false && jobList.length > 0}}" bindtap="toDetail">
+                <image class="no-limit-backImg"
+                    src="cloud://wallstreettequila-bbpq3.7761-wallstreettequila-bbpq3-1302238256/limit-apply.png" />
+                <view class="no-limit-text">
+                    <image src="/images/lock.png"></image>
+                    <text>{{referralsPage.nolimit}}</text>
+                </view>
+            </view>
+            <view class="no-data wangshen" wx:if="{{jobList.length <= 0}}">
+                <image src="/images/no-application.png"></image>
+                <text>{{referralsPage.noData}}</text>
+            </view>
+        </view>
+
+        <view wx:if="{{currentTab == 1}}" data-current="1" style="padding-bottom: 30rpx;">
+            <view class="application-box" wx:for="{{jobList}}" wx:key="index">
+                <view bindtap="toDetail" data-jid="{{item.jobId}}">
+                    <view wx:if="{{item.menteeCollectCount > 0}}" class="appli-status-save">
+                        <image src="/images/shoucang.png" lazy-load="{{true}}"></image>
+                        <text>已收藏</text>
+                    </view>
+                    <view wx:if="{{item.menteeApplyCount > 0}}" class="appli-status-send">
+                        <image src="/images/send.png" lazy-load="{{true}}"></image>
+                        <text>{{referralsPage.delivered}}</text>
+                    </view>
+                    <view wx:if="{{item.menteeApplyCount <= 0 || item.menteeCollectCount < 0}}"
+                        class="appli-status-stop">
+                        {{referralsPage.closed}}</view>
+                    <view class="appli-area">
+                        <image src="/images/weizhi-tianchong@2x.png" lazy-load="{{true}}"></image>
+                        <text>{{item.cityName}}{{item.countryName != null && item.cityName != null ? ',' : ''}}{{item.countryName}}</text>
+                    </view>
+                    <image binderror="imageError" mode="aspectFit" class="appli-logo" src="{{item.logo}}"
+                        lazy-load="{{true}}"></image>
+                    <text class="appli-content">{{item.jobName}}</text>
+                    <text class="appli-name">{{item.companyName}}</text>
+                    <view class="appli-publish">
+                        <view class="publish-time">
+                            <text class="publish-time-up">{{item.createTime}}</text>
+                            <text class="publish-time-down">{{referralsPage.publish}}</text>
+                        </view>
+
+                        <view class="line"></view>
+                        <view class="publish-time">
+                            <text class="publish-time-up">{{item.deadLine}}</text>
+                            <text class="publish-time-down">{{referralsPage.deadline}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="limit-box" wx:if="{{hasLimit == false && jobList.length > 0}}" bindtap="toDetail">
+                <image class="no-limit-backImg"
+                    src="cloud://wallstreettequila-bbpq3.7761-wallstreettequila-bbpq3-1302238256/limit-apply.png" />
+                <view class="no-limit-text">
+                    <image src="/images/lock.png"></image>
+                    <text>{{referralsPage.nolimit}}</text>
+                </view>
+            </view>
+            <view class="no-data wangshen" wx:if="{{jobList.length <= 0}}">
+                <image src="/images/no-application.png"></image>
+                <text>{{referralsPage.noDataOut}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="loading-box" wx:else>
+    <van-loading size="24px" vertical type="spinner">Loading...</van-loading>
+</view>
+
+<!-- 弹窗 -->
+<view class="limit-mask" wx:if="{{showLimitModal}}" bindtap="hideMask" catchtouchmove="preventTouchMove"></view>
+<view class="limit-popup-success" wx:if="{{showLimitModal}}">
+    <text class="limit-pop-up-title">无权限访问该内推</text>
+    <view class="limit-pop-up-button" bindtap="hideMask">OK</view>
+</view>
+

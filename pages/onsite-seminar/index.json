@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "van-collapse": "/components/dist/collapse/index",
+    "van-collapse-item": "/components/dist/collapse-item/index",
+    "van-loading": "/components/dist/loading/index"
+  },
+  "navigationBarTitleText": "Onsite Seminar"
+}

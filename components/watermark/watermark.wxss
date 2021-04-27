@@ -1,0 +1,29 @@
+
+.water_top {
+  width: fit-content;
+  padding: 0rpx 10rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+
+.water-text {
+ 
+  color: rgb(195, 46, 71, .3);
+  text-align: center;
+  font-size: 22px;
+}
+
+.water-box{
+  position: fixed;
+  top: 40%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: fit-content;
+  height: 80rpx;
+  line-height: 80rpx;
+  z-index: 9999999999;
+  margin: 0 auto;
+  transform: rotate(-10deg);
+}
+

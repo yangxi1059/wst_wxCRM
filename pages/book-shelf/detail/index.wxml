@@ -1,0 +1,12 @@
+<view class="index-page">
+    <view class="content">
+        <view class="book-box">
+            <van-image src="{{bookDetail.bookCover}}" width="550rpx" height="740rpx" fit="cover" lazy-load
+            custom-class="book-cover" bindtap="toPreview" data-url="{{bookDetail.previewUrl}}">
+            </van-image>
+            <view class="book-name">{{bookDetail.bookName}}</view>
+            <view class="book-detail">{{bookDetail.createTime}}</view>
+        </view>
+        <view class="button">COLLECTION</view>
+    </view>
+</view>

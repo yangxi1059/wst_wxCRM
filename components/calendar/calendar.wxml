@@ -1,0 +1,37 @@
+<view class="calendar">
+  <view class="tit">
+    <view class="pre" bindtap="gotoPreMonth">
+      <image src="/images/month-more.png"></image>
+    </view>
+    <view class="current">{{currentYear}}-{{currentMonth}}</view>
+    <view class="next" bindtap="gotoNextMonth">
+      <image src="/images/month-more.png"></image>
+    </view>
+  </view>
+  <view class="w100P showData">
+    <view>Sun</view>
+    <view>Mon</view>
+    <view>Tue</view>
+    <view>Wed</view>
+    <view>Thu</view>
+    <view>Fri</view>
+    <view>Sat</view>
+
+    <!-- <view>日</view>
+    <view>一</view>
+    <view>二</view>
+    <view>三</view>
+    <view>四</view>
+    <view>五</view>
+    <view>六</view> -->
+  </view>
+  <view class="content">
+    <view wx:for="{{allArr}}" wx:key="key" class="itemData {{item.month == 'current' ? '' : 'gray'}}"
+      data-currency="{{item.month == 'current' ? '1' : '0'}}" data-day="{{item.date}}" bindtap="getNowData">
+      <view class="{{item.month == 'current' ? '' : 'gray'}}"
+        style="height:65rpx;width:65rpx;line-height:65rpx;{{item.month == 'current'&&nowYear==currentYear&&currentMonth==nowMonth&&item.date==nowDate?'color:#fff;background:#C32E47;border-radius:100%':''}}">
+        {{item.date}}</view>
+        <!-- <view wx:if="{{item.month == 'current'&& nowYear==currentYear && currentMonth==nowMonth && item.checked == true}}" class="red-circle"></view> -->
+    </view>
+  </view>
+</view>

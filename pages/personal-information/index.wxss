@@ -1,0 +1,68 @@
+page {
+    background: #fff;
+}
+
+.form {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.info-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 80rpx 0;
+}
+
+.info-left {
+    display: block;
+    font-size: 32rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: rgba(54, 59, 62, 1);
+}
+
+.line-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 28rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: rgba(142, 152, 163, 1);
+    width: 300rpx;
+    height: 42rpx;
+}
+
+
+.line-right-img {
+    width: 70rpx;
+    height: 70rpx;
+    border-radius: 100%;
+}
+
+.more {
+    margin-left: 10rpx;
+    width: 11rpx;
+    height: 17rpx;
+}
+
+.quit {
+    position: fixed;
+    bottom: 160rpx;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 660rpx;
+    height: 100rpx;
+    background: rgba(245, 246, 247, 1);
+    border-radius: 50rpx;
+    text-align: center;
+    line-height: 100rpx;
+    font-size: 32rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: rgba(142, 152, 163, 1);
+}

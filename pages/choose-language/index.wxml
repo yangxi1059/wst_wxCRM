@@ -1,0 +1,16 @@
+<view class="index-page">
+    <view class="white-box" bindtap="choose" data-type="chinese">
+        <view class="content-box">
+            <text>中文</text>
+            <image wx:if="{{language == 'chinese'}}" src="/images/checked.png"></image>
+        </view>
+    </view>
+    <view class="line"></view>
+    <view class="white-box" bindtap="choose" data-type="english">
+        <view class="content-box">
+            <text>English</text>
+            <image wx:if="{{language == 'english'}}" src="/images/checked.png"></image>
+        </view>
+    </view>
+
+</view>

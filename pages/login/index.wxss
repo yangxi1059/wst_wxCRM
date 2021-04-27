@@ -1,0 +1,66 @@
+page {
+    background-color: #F5F6F7;
+}
+
+.login-box {
+    margin: 340rpx auto;
+    width: 574rpx;
+}
+
+.icon-logo {
+    width: 205rpx;
+    height: 61rpx;
+    display: block;
+    margin: 0 auto;
+}
+
+.login-text {
+    width: 500rpx;
+    margin: 40rpx auto 70rpx auto;
+    display: block;
+    text-align: center;
+    font-size: 34rpx;
+    font-family: Manrope-ExtraLight_Medium, Manrope;
+    font-weight: normal;
+    color: rgba(0, 0, 0, 1);
+}
+
+.btn-login {
+    width: 574rx;
+    height: 94rpx;
+    background: rgba(25, 214, 108, 1);
+    border-radius: 12rpx;
+    font-size: 28rpx;
+    font-family: Manrope-ExtraLight_Medium, Manrope;
+    font-weight: normal;
+    color: rgba(255, 255, 255, 1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+button::after {
+    border: none;
+}
+
+.btn-login image {
+    width: 33rpx;
+    height: 27rpx;
+    margin-right: 20rpx;
+}
+
+.btn-cancle {
+    margin-top: 40rpx;
+    width: 574rpx;
+    height: 94rpx;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 12rpx;
+    opacity: 0.6;
+    font-size: 28rpx;
+    font-family: Manrope-ExtraLight_Medium, Manrope;
+    font-weight: normal;
+    color: rgba(155, 155, 155, 1);
+    text-align: center;
+    line-height: 94rpx;
+}

@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "tui-loadmore": "../../miniprogram_npm/thorui/loadmore/loadmore",
+    "tui-list-cell":"../../../miniprogram_npm/thorui/list-cell/list-cell",
+    "tui-dropdown-list":"../../miniprogram_npm/thorui/dropdown-list/dropdown-list",
+    "tui-icon":"../../miniprogram_npm/thorui/icon/icon"
+  },
+  "navigationBarTitleText": "Recruitment Series",
+  "navigationBarBackgroundColor": "#F8F9FA"
+}

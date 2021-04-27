@@ -1,0 +1,97 @@
+<view class="view-page">
+    <view class="navbar custom-class" style="height:{{navHeight * 2}}rpx;">
+        <view class="navbar-action-wrap navbar-action-group row item-center"
+            style="top:{{navTop * 2}}rpx;width:{{menuButtonWidth}}px;height:{{menuButtonHeight}}px">
+            <view class="navigator_box" bindtap="navBack">
+                <image src="/images/ic_back.png" class="ic-back"></image>
+            </view>
+        </view>
+        <view class="navbar-title" style="top:{{navTop}}px">Interview DataBase</view>
+    </view>
+    <view class="page-content" style="margin-top:{{navHeight + 20}}px">
+        <view class="index-page" wx:if="{{!isLoading}}">
+            <!-- search -->
+            <view class="search-box" wx:if="{{isBinding != 0}}">
+                <van-search shape="round" placeholder="{{interviewDatabasePage.search}}" bind:search="onSearch"
+                    bind:clear="onClear" bind:change="onChange" />
+            </view>
+
+            <!-- Filter -->
+            <view class="filter-box">
+                <view class="select-box-half" wx:for="{{selectData}}" wx:key="index" wx:if="{{index < 4}}">
+                    <view class="content-box" data-select="{{index}}" bindtap="bindShowMsg">
+                        <text class="select-name {{item.status ? 'selected-name' :''}}">{{item.selectName}}</text>
+                        <image
+                            class="notanslate {{currentSelect == index && iconSelected && select ? 'tanslateImage' : ''}}"
+                            src="/images/jiantou.png"></image>
+                    </view>
+                    <view class="select-list" wx:if="{{currentSelect == index ? select :''}}">
+                        <view wx:for="{{item.selectList}}" wx:key="unique" wx:for-item="items" wx:for-index="bindex">
+                            <view class="select_one" bindtap="mySelect" data-id="{{index}}" data-aid="{{bindex}}"
+                                data-name="{{items.itemName}}" data-value="{{items.itemValue}}">{{items.itemName}}
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="select-box" wx:for="{{selectData}}" wx:key="index" wx:if="{{index > 3 && index <= 4}}">
+                    <view class="content-boxs" data-select="{{index}}" bindtap="bindShowMsg">
+                        <text class="select-name {{item.status ? 'selected-name' :''}}">{{item.selectName}}</text>
+                        <image class=" {{currentSelect == index && iconSelected && select ? 'tanslateImage' : ''}}"
+                            src="/images/jiantou.png"></image>
+                    </view>
+                    <view class="select-list long" wx:if="{{currentSelect == index ? select :''}}">
+                        <view wx:for="{{item.selectList}}" wx:key="unique" wx:for-item="items" wx:for-index="bindex">
+                            <view class="select_one long" bindtap="mySelect" data-id="{{index}}" data-aid="{{bindex}}"
+                                data-name="{{items.itemName}}" data-value="{{items.itemValue}}">{{items.itemName}}
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+
+            <!-- List -->
+            <view class="interview-list" wx:if="{{ interviewList.length > 0 }}">
+                <view class="interview-box" wx:for="{{interviewList}}" wx:key="key" bindtap="toDetail"
+                    data-pkid="{{item.pkId}}">
+                    <view class="interview-info">
+                        <view class="interview-left">
+                            <image class="interview-image" mode="aspectFit" src="{{item.companyLogo}}"></image>
+                            <view class="interview-info-box">
+                                <view class="interview-name">{{item.companyName}}</view>
+                                <view class="interview-job">{{interviewDatabasePage.jobFunction}}: {{item.trackName}}
+                                </view>
+                                <text class="interview-job">{{interviewDatabasePage.location}}: {{item.cityName}}</text>
+                                <view class="interview-difficulty">{{interviewDatabasePage.difficulty}}:
+                                    <block wx:for="{{item.difficultyLevel}}" wx:key="index">
+                                        <image src="/images/level-fill (1).png"></image>
+                                    </block>
+                                    <block wx:for="{{5 - item.difficultyLevel}}" wx:key="index">
+                                        <image src="/images/level-fill (2).png"></image>
+                                    </block>
+                                </view>
+                            </view>
+                        </view>
+                        <image wx:if="{{isBinding == 1}}" class="interview-more" src="/images/content-more.png"></image>
+                        <image wx:else class="quanxian" src="/images/quanxian.png"></image>
+                    </view>
+                </view>
+
+                <view class="no-limit" wx:if="{{isBinding == 0}}">
+                    <image class="no-limit-backImg"
+                        src="cloud://wallstreettequila-bbpq3.7761-wallstreettequila-bbpq3-1302238256/limit-interview.png" />
+                    <view class="no-limit-text">
+                        <image src="/images/lock.png"></image>
+                        <text>{{interviewDatabasePage.nolimit}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="no-data" wx:else>
+                <image src="/images/no-interview.png"></image>
+                <text>Current Empty~</text>
+            </view>
+        </view>
+        <view class="loading-box" wx:else>
+            <van-loading size="24px" vertical type="spinner">Loading...</van-loading>
+        </view>
+    </view>
+</view>

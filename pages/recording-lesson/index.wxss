@@ -1,0 +1,516 @@
+page {
+    height: 100%;
+    background-color: #F8F9FA;
+}
+
+.page {
+    -webkit-overflow-scrolling: touch;
+    width: 690rpx;
+    margin: 0 auto;
+}
+
+.index-page {
+    width: 630rpx;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 20rpx 20rpx -7rpx rgba(165, 181, 196, 0.1);
+    border-radius: 24rpx;
+    margin: 35rpx auto 0rpx auto;
+    padding: 30rpx 30rpx 21rpx 30rpx;
+    animation: myfirst 0.2s;
+}
+
+.lesson-cover-info {
+    width: 630rpx;
+    height: 320rpx;
+    position: relative;
+}
+
+.lesson-cover-img {
+    width: 630rpx;
+    height: 320rpx;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    border-radius: 12rpx;
+}
+
+.lesson-cover-box {
+    position: absolute;
+    bottom: 25rpx;
+    left: 30rpx;
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    justify-content: flex-start;
+}
+
+.mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 630rpx;
+    height: 320rpx;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
+    border-radius: 12rpx;
+}
+
+.lesson-cover-text {
+    display: block;
+    background-color: #00000086;
+    width: fit-content;
+    padding: 6rpx 15rpx;
+    position: absolute;
+    top: 30rpx;
+    left: 30rpx;
+    border-radius: 6rpx;
+    font-size: 22rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+}
+
+.lesson-cover-lable {
+    margin-right: 20rpx;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: fit-content;
+    padding: 6rpx 15rpx;
+    border-radius: 6rpx;
+    font-size: 22rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+}
+
+.lesson-cover-text-right {
+    background-color: #0000008b;
+    width: fit-content;
+    padding: 8rpx 10rpx 8rpx 0rpx;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 22rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+    border-top-left-radius: 40rpx;
+    border-bottom-left-radius: 40rpx;
+    border-top-right-radius: 19rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+.lesson-cover-text-right image {
+    width: 37rpx;
+    height: 37rpx;
+    margin: 0 10rpx 0rpx 8rpx;
+}
+
+.lesson-cover-text-right text {
+    margin-right: 10rpx;
+}
+
+.lesson-title {
+    margin: 0rpx 0rpx 20rpx 0rpx;
+    font-size: 28rpx;
+    font-family: Manrope-ExtraLight_Medium, Manrope;
+    font-weight: normal;
+    color: rgba(54, 59, 62, 1);
+}
+
+
+.lesson-level {
+    margin-bottom: 20rpx;
+    font-size: 24rpx;
+    color: #8E98A3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.lesson-level image {
+    width: 20rpx;
+    height: 20rpx;
+    margin: 0px 5rpx 0px 0rpx;
+}
+
+.lesson-level text {
+    margin-right: 25rpx;
+}
+
+.lesson-info {
+    width: 100%;
+    margin-top: 20rpx;
+}
+
+.lesson-time {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 24rpx;
+    color: #949EA8;
+}
+
+.lesson-time view text {
+    color: rgba(54, 59, 62, 1);
+    margin: 0 6rpx;
+}
+
+/*隐藏滚动条*/
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+    display: none;
+}
+
+.comment {
+    padding-bottom: 20px;
+}
+
+.tab-box {
+    width: 690rpx;
+    height: 120rpx;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 24rpx;
+    margin: 30rpx auto;
+    position: relative;
+}
+
+.tabBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.weui-navbar-slider {
+    position: absolute;
+    width: 230rpx;
+    height: 120rpx;
+    border-radius: 24rpx;
+    bottom: 0px;
+    transition: transform .4s;
+    background: linear-gradient(360deg, rgba(255, 142, 136, 1) 0%, rgba(249, 192, 151, 1) 100%);
+    box-shadow: 0px 20rpx 20rpx -7rpx rgba(252, 168, 144, 0.3);
+    z-index: 1;
+}
+
+.tab-item {
+    width: 230rpx;
+    height: 120rpx;
+    border-radius: 24rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 25rpx;
+    font-family: Manrope-ExtraLight_Bold, Manrope;
+    font-weight: normal;
+    color: #363B3E;
+    z-index: 2;
+
+}
+
+.on0 {
+    background: linear-gradient(360deg, rgba(255, 142, 136, 1) 0%, rgba(249, 192, 151, 1) 100%);
+    box-shadow: 0px 20rpx 20rpx -7rpx rgba(252, 168, 144, 0.3);
+    color: rgba(255, 255, 255, 1);
+}
+
+.on1 {
+    background: linear-gradient(180deg, rgba(199, 219, 243, 1) 0%, rgba(135, 168, 239, 1) 100%);
+    box-shadow: 0px 20rpx 20rpx -7rpx rgba(154, 188, 245, 0.3);
+    color: rgba(255, 255, 255, 1);
+}
+
+.on2 {
+    background: linear-gradient(180deg, rgba(116, 242, 173, 1) 0%, rgba(80, 233, 174, 1) 100%);
+    box-shadow: 0px 20rpx 20rpx -7rpx rgba(0, 243, 169, 0.3);
+    color: rgba(255, 255, 255, 1);
+}
+
+@keyframes my {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes myContent {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.tab-item image {
+    margin: 23rpx 0rpx 10rpx 0rpx;
+}
+
+.icon-orange {
+    width: 37rpx;
+    height: 37rpx;
+}
+
+.icon-purple {
+    width: 45rpx;
+    height: 36rpx;
+}
+
+.icon-green {
+    width: 40rpx;
+    height: 36rpx;
+}
+
+.fieldClass {
+    flex: 1;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 12rpx;
+    padding: 0rpx 10rpx;
+    height: 70rpx;
+    display: flex;
+    align-items: center;
+    padding-left: 20rpx;
+}
+
+.searchClass {
+    width: 100%;
+}
+
+.inputClass {
+    background-color: #fff;
+}
+
+.inputClass .van-search__content {
+    padding-left: 0;
+}
+
+.select-box-big {
+    width: 690rpx;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.select-box {
+    width: 300rpx;
+    height: 70rpx;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 20rpx 20rpx -7rpx rgba(252, 168, 144, 0.05);
+    border-radius: 12rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    margin-right: 20rpx;
+}
+
+.select-left {
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.left-image-box {
+    width: 78rpx;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.left-image-box image {
+    display: block;
+    margin: 0 auto;
+}
+
+.icon0 {
+    width: 28rpx;
+    height: 28rpx;
+}
+
+.select-left text {
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: rgba(254, 144, 136, 1);
+}
+
+
+.select-right {
+    width: 107rpx;
+    text-align: center;
+
+}
+
+.select-right image {
+    width: 27rpx;
+    height: 27rpx;
+}
+
+.icon-up {
+    transform: rotate(0deg);
+    transition: all 0.2s;
+}
+
+.icon-down {
+    transform: rotate(180deg);
+}
+
+/* 下拉内容 */
+.select-list {
+    position: absolute;
+    width: 300rpx;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 20rpx 20rpx -7rpx rgba(0, 0, 0, 0.2);
+    border-radius: 6rpx;
+    z-index: 99;
+    overflow: hidden;
+    text-align: left;
+    animation: myfirst 0.2s;
+    font-size: 28rpx;
+    padding: 25rpx 0;
+    transform: translateZ(0);
+}
+
+.select_one {
+    padding: 20rpx 0rpx;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    align-items: center;
+}
+
+.select_one text {
+    color: #363B3E;
+}
+
+
+@keyframes myfirst {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+.icon1 {
+    width: 33rpx;
+    height: 28rpx;
+
+}
+
+.icon2 {
+    width: 30rpx;
+    height: 33rpx;
+}
+
+.icon3 {
+    width: 35rpx;
+    height: 33rpx;
+}
+
+.icon4 {
+    width: 38rpx;
+    height: 29rpx;
+}
+
+.icon5 {
+    width: 29rpx;
+    height: 35rpx;
+}
+
+/* 暂无数据 */
+.nodata {
+    margin-top: 260rpx;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.nodata-img {
+    width: 442rpx;
+    height: 250rpx;
+}
+
+.nodata-text {
+    display: block;
+    margin-top: 41rpx;
+    font-size: 28rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: rgba(142, 152, 163, 1);
+}
+
+button::after {
+    border: 1px solid transparent;
+}
+
+.lesson-share {
+    position: absolute;
+    right: 30rpx;
+    bottom: 10rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 22rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+    background-color: transparent;
+    padding: 0;
+}
+
+.share-icon-box {
+    width: 53rpx;
+    height: 53rpx;
+    border-radius: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.share-icon-box image {
+    display: block;
+    margin: 17rpx auto;
+    width: 24rpx;
+    height: 20rpx;
+}
+
+.tui-searchbox {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.tui-search-input {
+    width: 100%;
+    height: 66rpx;
+    border-radius: 35rpx;
+    box-sizing: border-box;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    font-size: 26rpx;
+}
+
+.tui-search-input input {
+    margin-left: 15rpx;
+}

@@ -1,0 +1,41 @@
+<view class="index-page">
+  <view class="tui-searchbox">
+    <view class="tui-search-input">
+      <icon type="search" size="13" color="#333"></icon>
+      <input  value="{{key}}" placeholder="Search" confirm-type="search" placeholder-class="tui-input-plholder" class="tui-input" bindinput="input"   bindconfirm="onSearch"/>
+      <icon type="clear" size="13" color="#bcbcbc" bindtap="cleanKey" hidden="{{!key}}"></icon>
+    </view>
+  </view>
+
+  <view class="lable-box" wx:if="{{hotTags.length > 0}}">
+    <view class="lable-box-title">
+      <view class="title-left">{{searchPage.popularTopics}}</view>
+    </view>
+    <view class="lable-list">
+      <block wx:if="{{index < 10}}" wx:for="{{hotTags}}" wx:key="key">
+        <view class="lable-item" data-key="{{item}}" bindtap="searchHot">{{item}}</view>
+      </block>
+    </view>
+  </view>
+
+
+  <view class="lable-box" wx:if="{{historyTags.length > 0}}">
+    <view class="lable-box-title">
+      <view class="title-left">
+        历史搜索
+        <!-- <image class="ic-history" src="/images/icon-history.png"></image> -->
+      </view>
+      <view class="title-right" bindtap="deleteHistoty">
+        <image src="/images/icon-delete.png"> </image>
+      </view>
+    </view>
+    <view class="lable-list">
+      <block wx:for="{{historyTags}}" wx:key="key">
+        <view class="lable-item" data-key="{{item}}" bindtap="searchHot">{{item}}</view>
+      </block>
+    </view>
+  </view>
+</view>
+
+
+<navigator open-type="navigateBack" bindsuccess="pageBack"></navigator>

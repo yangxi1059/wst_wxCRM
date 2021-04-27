@@ -1,0 +1,15 @@
+<view class="navbar custom-class" style='height:{{navHeight}}px;background-color:{{bgColor}}'>
+<view wx:if="{{showNav}}" class="navbar-action-wrap navbar-action-group row item-center" style='top:{{navTop}}px;background-color:{{navColor}};border:1rpx solid {{navBorder}};width:{{menuButtonWidth}}px;height:{{menuButtonHeight}}px'>
+     <block wx:if="{{iconColor == 'black'}}">
+      <view class="navigator_box" bindtap="_navBack"><image src="../../../images/ic_back.png" class="ic-back" ></image></view> 
+      <view class="navigator_box" bindtap="_toIndex"><image src="../../../images/ic_home.png" class="ic-home" ></image></view>
+     </block>
+     <block wx:if="{{iconColor == 'white'}}">
+      <view class="navigator_box" bindtap="_navBack"><image src="../../../images/ic-back-white.png" class="ic-back" ></image></view> 
+      <view class="navigator_box" bindtap="_toIndex"><image src="../../../images/ic-home-white.png" class="ic-home" ></image></view>
+     </block>
+  </view>
+  <view class='navbar-title' style='top:{{navTop}}px'>
+    {{pageName}}
+  </view>
+</view>

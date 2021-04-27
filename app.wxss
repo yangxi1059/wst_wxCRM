@@ -1,0 +1,213 @@
+page{
+  background-color: #F8F9FA;
+}
+
+
+.loading-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+}
+
+.no-data {
+  width: 391rpx;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(150, 157, 164, 1);
+}
+
+.no-data image {
+  width: 391rpx;
+  height: 260rpx;
+  margin-bottom: 26rpx;
+}
+
+.tabbar-line::after{
+  content: '';
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2rpx;
+  background-color: rgb(210, 218, 225,0.3);
+  z-index: 9999;
+}
+
+.pop-ups-close-image{
+  position: absolute;
+  right: 36rpx;
+  top: 36rpx;
+  width: 42rpx;
+  height: 42rpx;
+}
+
+/*面经*/
+.interview-box {
+  margin-top: 30rpx;
+  width: 619rpx;
+  padding: 27rpx 34rpx 27rpx 13rpx;
+  box-shadow: 0px 20rpx 20rpx -7rpx rgba(165, 181, 196, 0.1);
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.interview-left {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.interview-info-box{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.interview-image {
+  width: 150rpx;
+  height: 150rpx;
+  margin-right: 33rpx;
+  border-radius: 38rpx;
+  /* border: 1px solid #F3F4F8; */
+}
+
+.interview-info {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.interview-name {
+  font-size: 30rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #1D1D1D;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+}
+
+.interview-job,
+.interview-difficulty {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #9DA4AE;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+}
+
+.interview-difficulty {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.interview-difficulty image {
+  margin-top: 4rpx;
+  margin-left: 4rpx;
+  width: 20rpx;
+  height: 20rpx;
+}
+
+.interview-difficulty image:first-child {
+  margin-left: 8rpx;
+}
+
+.interview-more{
+  width: 14rpx;
+  height: 27rpx;
+}
+
+.wangshen{
+  margin-top: 220rpx;
+}
+
+
+/*倍速播放*/
+.set-up {
+  position: absolute;
+  right: 40rpx;
+  top: 41rpx;
+  z-index: 9;
+}
+
+.beisu-mask {
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 176rpx;
+  height: 100%;
+  background: rgb(0, 0, 0,0.7);
+  display: block;
+}
+
+.beisu-box {
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 176rpx;
+  height: 455rpx;
+  background: rgb(0, 0, 0,0.7);
+  display: flex;
+  align-items: center;
+}
+
+.beisu-item-box {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgb(180, 179, 179);
+}
+
+.beisu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  color: #FFFFFF;
+  margin-top: 40rpx;
+}
+
+.beisu-item:first-child{
+  margin-top: 50rpx;
+}
+
+.beisu-item-active {
+  color: #C32E47;
+}

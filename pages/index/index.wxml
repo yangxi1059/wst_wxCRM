@@ -1,0 +1,42 @@
+<view class="index-page" wx:if="{{isLoading}}">
+  <view class="banner-box">
+    <view class="container">
+      <!--轮播图-->
+      <swiper class="home-swiper" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <block wx:for-items="{{lunboData}}" wx:key="key">
+          <swiper-item>
+            <image mode="aspectFill" src="{{item.imgurl}}" class="slide-image" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
+
+  <view class="manage-box">
+    <view class="manage-title">申请审核</view>
+    <view class="grid-box">
+      <view class="grid-item" wx:for="{{checkList}}" wx:key="key" data-url="{{item.url}}" bindtap="switchPages">
+        <image src="{{item.src}}"></image>
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="manage-box">
+    <view class="manage-title">综合管理</view>
+    <view class="grid-box">
+      <view class="grid-item" wx:if="{{item.isShow}}"  wx:for="{{allManageList}}" wx:key="key" data-url="{{item.url}}" bindtap="switchPage">
+        <image src="{{item.src}}"></image>
+        <text>{{item.name}}</text>
+      </view>
+      <!-- <view class="grid-item" bindtap="openFile">
+        <image></image>
+        <text>文件预览</text>
+      </view> -->
+    </view>
+  </view>
+</view>
+
+<block wx:else>
+  <tui-loadmore visible="{{true}}" index="1" type="primary"></tui-loadmore>
+</block>

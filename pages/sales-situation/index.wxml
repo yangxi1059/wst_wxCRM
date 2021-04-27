@@ -1,0 +1,65 @@
+<view class="index-page" wx:if="{{!isLoading}}">
+    <text class="page-title">本周期（{{info.historyMonth}}）</text>
+
+    <view class="progress-box">
+        <view class="target-box">
+            <text class="target-title">销售级别：</text>
+            <view class="target-content">
+                <text>Lv.{{info.salesLevel}}</text>
+            </view>
+        </view>
+        <view class="target-box">
+            <text class="target-title">考核目标：</text>
+            <view class="target-content">
+                <image src="/images/{{info.isComplete ? 'smiling' : 'worried' }}-face.png"></image>
+                <text>{{info.isComplete ? '达标' : '未达标' }}</text>
+            </view>
+        </view>
+
+        <view class="target-box" wx:if="{{info.salesLevel == 0}}">
+            <text class="target-title">KPI</text>
+            <view class="target-content"><text>{{info.kpi}}</text></view>
+        </view>
+
+        <view class="progress-item" wx:elif="{{info.kpiTarget != 0}}">
+            <view class="progress-text">
+                <view class="progress-text-left">
+                    <text class="progress-name">KPI</text><text>{{info.kpi}}/{{info.kpiTarget}}</text>
+                </view>
+                <text class="progress-text-right" >{{info.kpiPercent}}%</text>
+            </view>
+            <progress class="weui-progress" duration="8" percent="{{info.kpiPercent}}" backgroundColor="#F6F8FA" stroke-width="7"
+                color="#C32E47" active="true" active-mode="backwards" />
+        </view>
+        <view class="progress-item" wx:if="{{info.monthlyRevenueKpiTarget != 0}}">
+            <view class="progress-text">
+                <view class="progress-text-left">
+                    <text class="progress-name">团队成员入账</text><text>{{info.monthlyRevenueKpi}}/{{info.monthlyRevenueKpiTarget}}</text>
+                </view>
+                <text class="progress-text-right" >{{info.ruzhangPercent}}%</text>
+            </view>
+            <progress class="weui-progress" duration="8" percent="{{info.ruzhangPercent}}" backgroundColor="#F6F8FA" stroke-width="7"
+                color="#C32E47" active="true" active-mode="backwards" />
+        </view>
+        <view class="grey-line"></view>
+        <view class="ticheng-box">
+            <view class="ticheng-left">
+                <image src="/images/ticheng-bili.png"></image><text>提成比例</text>
+            </view>
+            <text>{{info.brokerageRate}}%</text>
+        </view>
+        <view class="ticheng-box">
+            <view class="ticheng-left">
+                <image src="/images/ticheng-jine.png"></image><text>提成</text>
+            </view>
+            <text>￥{{info.brokerageTotal}}</text>
+        </view>
+
+        <text class="info-box" wx:if="{{info.info}}">{{info.info}}</text>
+    </view>
+</view>
+
+
+<view class="loading-box" wx:else>
+    <van-loading size="24px" vertical type="spinner">Loading...</van-loading>
+</view>

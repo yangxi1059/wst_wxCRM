@@ -1,0 +1,210 @@
+<view class="index-page {{showSelectList || showCalender ? 'index-fixed':''}}" wx:if="{{!isLoading}}">
+    <view id="index-pageTop">
+        <view class="page-top">
+            <view class="tab-box">
+                <view class="tab-left">
+                    <view bindtap="switchTab" data-tab="0" class="tab-item {{currentTab == '0' ? 'active':''}}">
+                        Streaming</view>
+                    <view bindtap="switchTab" data-tab="1" class="tab-item {{currentTab == '1' ? 'active':''}}">
+                        一对多Office Hour</view>
+                </view>
+                <view wx:if="{{showslideOffset}}" class="weui-navbar-slider"
+                    style="transform:translateX({{slideOffset}}px);"></view>
+                <view wx:if="{{currentTab == 2}}" class="tab-right" bindtap="switchTab" data-tab="2">
+                    <text>我的课程</text>
+                    <image class="ic-my" src="/images/my.png"></image>
+                </view>
+                <view wx:if="{{currentTab == 0}}" class="tab-right">
+                    <view class="tab-right-item" bindtap="showCalender">
+                        <image class="ic-calendar" src="/images/{{isCheckDate ? 'icon-calendar_active':'icon-calendar'}}.png"></image>
+                    </view>
+                    <view class="tab-right-item" bindtap="showSelectList">
+                        <image class="ic-filter" src="/images/{{showSelectList ? 'filter-fill' : 'filter'}}.png"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="date-view" wx:if="{{currentTab == 1}}">
+            <view class="nowDate">{{currentMonth}} {{currentYear}}</view>
+            <scroll-view class="scroll-views" lower-threshold="50" scroll-x="true" scroll-into-view="{{scrollTo}}"
+                scroll-with-animation="true">
+                <view class="date-box">
+                    <view bindtap="switchDate" data-date="{{index}}" id="t{{index}}"
+                        class="date-item {{index == currentDate ? 'on':'' }}" wx:for="{{dateArr}}" wx:key="key">
+                        <text>{{item.dayText}}</text>
+                        <text>{{item.dateText}}</text>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+
+        <view class="search-box" wx:if="{{currentTab == 0}}">
+            <view class="fieldClass">
+                <van-search focus value="{{ searchValue }}" shape="round" background="#fff" placeholder="Search"
+                    bindtap="toSearch" bind:clear="clearInput" />
+            </view>
+        </view>
+    </view>
+
+    <view wx:if="{{currentTab == 0}}">
+        <view class="tabbar-line"></view>
+        <view class="live-box" wx:if="{{liveList.length >0}}">
+            <view class="item-box" wx:for="{{liveList}}" wx:key="key" bindtap="toDetail" data-liveid="{{item.liveId}}">
+                <view class="item-black">{{item.liveTitle}}</view>
+                <view class="tags-box" wx:if="{{item.tags.length > 0}}">
+                    <text>Tags:</text>
+                    <block wx:for="{{item.tags}}" wx:key="key" wx:for-item="tags">
+                        <view class="tag-item">{{tags}}</view>
+                    </block>
+                </view>
+                <view class="lesson-level">
+                    <text class="">Difficulty Level: </text>
+                    <block wx:for="{{item.difficultyLevel}}" wx:key="lindex">
+                        <image src="/images/level-fill (1).png"></image>
+                    </block>
+                    <block wx:for="{{ 5 - item.difficultyLevel}}" wx:key="index">
+                        <image src="/images/level-fill (2).png"></image>
+                    </block>
+                    <text style="margin-left: 15rpx;">{{item.difficultyLevel}}/5</text>
+                </view>
+                <block wx:if="{{item.liveStatus == 1}}">
+                    <view class="item-row">
+                        <view class="item-row">
+                            <image class="live-image" src="/images/live.gif"></image>
+                            <view class="live-text">Live</view>
+                        </view>
+                        <view class="text-more">{{streamingPage.more}} ></view>
+                    </view>
+                </block>
+                <block wx:if="{{item.liveStatus != 1}}">
+                    <view class="item-row-text">
+                        <view class="item-grey">{{item.planTime}} |
+                            {{item.liveStatus == 0 ? streamingPage.noStart :''}}{{item.liveStatus == 2 ? streamingPage.ended :''}}
+                        </view>
+                        <view class="text-more">{{streamingPage.more}} ></view>
+                    </view>
+                </block>
+            </view>
+        </view>
+
+        <view class="nodata" wx:else>
+            <image class="nodata-img" src="/images/nodata.png"></image>
+            <text class="nodata-text">Currently Empty～</text>
+        </view>
+    </view>
+
+    <!-- 一对多Office Hour -->
+    <view class="page-center" wx:if="{{currentTab == 1}}">
+        <swiper  style="height:{{centerHeight}}px" current="{{currentDate}}" class="swiper-box" duration="300"
+            bindchange="bindChange">
+            <block wx:for="{{dateArr}}" wx:key="key">
+                <swiper-item class="{{hasLimited ?'' :'swiperItemFixed'}}">
+                    <view wx:if="{{!hasLimited}}" class="hasLimitedBox" style="height:{{centerHeight}}px">
+                        <image style="margin-top:{{(centerHeight - 74) / 2}}px" src="/images/lock.png"></image>
+                    </view>
+                    <view class="mentor-list" wx:if="{{dateArr[index].classList.length > 0}}">
+                        <view class="mentor-item-box" wx:for="{{dateArr[index].classList}}" wx:key="key"
+                            bindtap="toOrderDetail" data-lid="{{item.lessonId}}">
+                            <view class="mentor-time-box {{item.isApply ? 'hasOrder':''}}">{{item.startTime}}</view>
+                           <view class="mentor-item">
+                            <view class="mentor-item-left">
+                                <image mode="aspectFill" class="mentor-image" src="{{item.imgUrl}}"></image>
+                                <view class="mentor-info">
+                                    <view class="mentor-detail">{{item.lessonName}}</view>
+                                    <view class="mentor-name">{{item.lessonMentorName}}</view>
+                                </view>
+                            </view>
+                            <view wx:if="{{item.isApply}}" class="mentor-item-right subscribe">已预约</view>
+                            <block wx:else>
+                                <view wx:if="{{item.applyNum >= item.applyLimit}}" class="mentor-item-right">等候</view>
+                                <view wx:if="{{item.applyNum < item.applyLimit}}" class="mentor-item-right">预约</view>
+                            </block>
+                            <view wx:if="{{item.applyStatus != ''}}" class="apply-status">{{item.applyStatus}}</view>
+                           </view>
+                        </view>
+                    </view>
+                    <view class="nodata" wx:else>
+                        <image class="nodata-img" src="/images/nodata.png"></image>
+                        <text class="nodata-text">Currently Empty～</text>
+                    </view>
+                </swiper-item>
+            </block>
+        </swiper>
+        <view class="page-bottom" bindtap="switchTab" data-tab="2">
+            <text class="page-bottom-title">我的课程</text>
+            <view class="bottom-row">
+                <view class="bottom-item" wx:for="{{3}}" wx:key="key">
+                    <text wx:if="{{index == 0}}">{{applyTotalNum}}</text>
+                    <text wx:if="{{index == 1}}">{{applyInMonthNum}}</text>
+                    <text wx:if="{{index == 2}}">{{officeHourNum}}</text>
+                    <text wx:if="{{index == 0}}">累计已报名</text>
+                    <text wx:if="{{index == 1}}">本月已报名</text>
+                    <text wx:if="{{index == 2}}">本月可报名</text>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 我的课程 -->
+    <view class="page-center" wx:if="{{currentTab == 2}}">
+        <swiper style="height:{{winHeight - 31}}px" current="{{currentDate}}" class="swiper-box" duration="300"
+            bindchange="bindChange">
+            <swiper-item>
+                <view class="mentor-list" wx:if="{{myCourseList.length > 0}}">
+                    <view class="mentor-item-box" wx:for="{{myCourseList}}" wx:key="key" bindtap="toOrderDetail"
+                        data-lid="{{item.lessonId}}">
+                        <view class="mentor-time-box hasOrder"> {{item.startTime}}</view>
+                        <view class="mentor-item">
+                            <view class="mentor-item-left">
+                                <image mode="aspectFill" class="mentor-image" src="{{item.imgUrl}}"></image>
+                                <view class="mentor-info">
+                                    <view class="mentor-detail">{{item.lessonName}}</view>
+                                    <view class="mentor-name">{{item.lessonMentorName}}</view>
+                                </view>
+                            </view>
+                            <view class="hasSubscribe">已预约</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="nodata" wx:else>
+                    <image class="nodata-img" src="/images/nodata.png"></image>
+                    <text class="nodata-text">Currently Empty～</text>
+                </view>
+            </swiper-item>
+        </swiper>
+    </view>
+
+    <van-popup overlay-style="height:85%;position:fixed;bottom:0;top:auto"  show="{{ showSelectList }}" position="top" custom-style="overflow-y: scroll;height: 900rpx;"
+        bind:close="showSelectList">
+        <view class="label-box">
+            <view class="label-content">
+                <view class="label-type" wx:for="{{labelist}}" wx:key="key">
+                    <view class="label-name">{{item.name}}</view>
+                    <view class="label-arr">
+                        <block wx:for="{{item.list}}" wx:key="key" wx:for-item="list">
+                            <view class="default-lable {{list.active == true ? 'active-lable' : ''}}" wx:if="{{list.itemName}}" bindtap="clickLabel" data-type="{{item.name}}" data-value="{{list.itemValue}}">{{list.itemName}}</view>
+                        </block>
+                    </view>
+                </view>
+            </view>
+            <view class="label-button">
+                <view bindtap="resetLabel">重置</view>
+                <view bindtap="comfirmLabel">确定</view>
+            </view>
+        </view>
+    </van-popup>
+
+
+    <!-- 日历弹窗 -->
+    <van-popup show="{{ showCalender }}" round position="bottom" bind:close="showCalender" z-index="99999">
+        <calendar new-day="{{newDay}}" bindsendObj="getCalendarData" is-check="{{isCheckDate}}"></calendar>
+        <view class="calendar-comfirm">
+            <view class="calendar-reset" bindtap="resetData">重置</view>
+            <button disabled="{{isOk}}" class="calendar-comfirm-btn" data-date="{{currentDateLive}}" bindtap="filterByDate">确定</button>
+        </view>
+    </van-popup>
+</view>
+
+<view class="loading-box" wx:else>
+    <van-loading size="24px" vertical type="spinner">Loading...</van-loading>
+</view>

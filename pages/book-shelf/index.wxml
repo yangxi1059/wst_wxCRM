@@ -1,0 +1,101 @@
+<view class="view-page">
+    <view class="page-content">
+        <view class="index-page" wx:if="{{!isLoading}}">
+            <view class="page-top">
+                <van-search disabled custom-class="search-box" shape="round"  placeholder="搜索文件名"
+                    bindtap="searchFile" />
+            </view>
+            <view class="path-parent-box-big" wx:if="{{shelfPathArr.length > 0}}">
+                当前路径：
+                <block wx:for="{{shelfPathArr}}" wx:key="key">
+                    <block wx:if="{{index != shelfPathArr.length -1}}">
+                        <view class="clickable" data-sub="{{item.shelfId}}" bindtap="clickSubMenu">{{item.shelfName}}
+                        </view>
+                    </block>
+                    <block wx:if="{{index == shelfPathArr.length -1}}">
+                        <view>{{item.shelfName}}</view>
+                    </block>
+                    <text class="clickable" wx:if="{{index != shelfPathArr.length -1}}">></text>
+                </block>
+            </view>
+
+            <view class="book-column" wx:if="{{folderList.length > 0}}">
+                <block wx:for="{{folderList}}" wx:key="key">
+                    <view class="book-column-box">
+                        <view class="column-item" bindtap="clickSubMenu" data-sub="{{item.shelfId}}">
+                            <van-image src="{{item.fileCover}}" width="50rpx" height="60rpx" fit="cover"
+                                lazy-load="{{true}}" custom-class="column-item-cover">
+                            </van-image>
+                            <view class="column-item-right">
+                                <view class="column-item-name">{{item.shelfName}}</view>
+                            </view>
+                            <view class="icon-more-box" catchtap="clickMenu" data-sid="{{item.shelfId}}"
+                                data-name="{{item.shelfName}}" data-cover="{{item.fileCover}}">
+                                <image class="icon-more" src="/images/wait.png"></image>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+
+            <view class="nodata" wx:if="{{folderList.length <= 0 && bookList.length <= 0 }}">
+                <image class="nodata-img" src="{{emptyImageUrl}}"></image>
+                <text class="nodata-text">文件夹空空的</text>
+            </view>
+
+            <view class="book-column" wx:if="{{bookList.length > 0  }}">
+                <block wx:for="{{bookList}}" wx:key="key">
+                    <view class="book-column-box">
+                        <view class="column-item" data-bid="{{item.bookId}}" bindtap="showDetail">
+                            <van-image src="{{item.fileCover}}" width="50rpx" height="60rpx" fit="cover"
+                                lazy-load="{{true}}" custom-class="column-item-cover">
+                            </van-image>
+                            <view class="column-item-right">
+                                <view class="column-item-name">{{item.bookName}}</view>
+                                <view class="column-item-detail">
+                                    <text>{{item.createTime}}</text>
+                                    <text>{{item.fileSizeNew}}</text>
+                                </view>
+                            </view>
+                            <!-- <view class="icon-more-box"  data-sid="{{item.shelfId}}" data-name="{{item.bookName}}"
+                                data-cover="{{item.fileCover}}">
+                                <image class="icon-more" src="/images/wait.png"></image>
+                            </view> -->
+                        </view>
+                    </view>
+                </block>
+            </view>
+
+            <!-- 分享弹窗 -->
+            <van-popup show="{{ showMenu }}" round position="bottom" custom-style="height: 30%;width:100%"
+                bind:close="closeMenu">
+                <view class="menu-top">
+                    <image src="{{fileObj.fileCover}}"></image>
+                    <text>{{fileObj.fileName}}</text>
+                </view>
+                <button class="menu-center" open-type="share" data-sid="{{fileObj.shelfId}}">
+                    <image src="/images/icon-share-black.png"></image>
+                    <text>分享</text>
+                </button>
+                <view class="menu-bottom" bindtap="closeMenu">取消</view>
+            </van-popup>
+
+            <!-- 排序弹窗 -->
+            <!-- <van-popup show="{{ showOrderBy }}" position="bottom" custom-style="height: 40%;width:100%"
+                bind:close="closeOrderBy">
+                <view class="order-top">排序方式</view>
+                <view class="order-center active">
+                    <image src="/images/orderby-name-fill.png"></image>
+                    <text>名称排序</text>
+                </view>
+                <view class="order-center">
+                    <image src="/images/orderby-time.png"></image>
+                    <text>时间排序</text>
+                </view>
+            </van-popup> -->
+        </view>
+        <view class="loading-box" wx:else>
+            <van-loading size="24px" vertical type="spinner">Loading...</van-loading>
+        </view>
+    </view>
+</view>

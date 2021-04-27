@@ -1,0 +1,194 @@
+<view class="view-page">
+    <view class="index-page " wx:if="{{!isLoading}}">
+        <!-- 课程封面信息 -->
+        <view class="lesson-cover-info" wx:if="{{!showVideo}}">
+            <image class="lesson-cover-img" src="{{courseInfo.coverUrl}}" mode="aspectFill"></image>
+            <view class="lesson-mask"></view>
+            <text class="lesson-cover-title">{{courseInfo.courseTitle}}</text>
+            <view class="lesson-cover-box">
+                <block wx:for="{{courseInfo.tags}}" wx:key="index" wx:if="{{index < 2}}">
+                    <text class="lesson-cover-lable">{{item}}</text>
+                </block>
+            </view>
+            <view  class="lesson-cover-text-right">
+                <image src="/images/{{statusObj.imgSrc}}.png"></image>{{statusObj.name}}
+            </view>
+        </view>
+
+        <view class="lessson-video-box" wx:else>
+            <video id="myVideo" objectFit="cover" src="{{videoSrc}}" title="{{videoTitle}}" loop="{{true}}"
+                autoplay="{{true}}" show-center-play-btn vslide-gesture-in-fullscreen show-screen-lock-button controls
+                enable-play-gesture bindtimeupdate="timeUpdate" bindended="playEnd" bindpause="playPause"
+                bindplay="playStart" bindfullscreenchange="fullscreen" bindtap="clickVideo">
+                <view class="marquee_box">
+                    <view class="marquee_text"
+                        style="{{orientation}}:{{marqueeDistance}}px;font-size: {{size}}px;top:{{randomHeight}}rpx">
+                        {{waterMarkText}}
+                    </view>
+                </view>
+            </video>
+            <view class="playProgress" wx:if="{{hasTimeNode}}">
+                <view class="playProgress-text">记忆您上次看到：{{showTimeNode}} <text catchtap="jumpPlay">跳转播放</text>
+                </view>
+                <image src="/images/close.png" bindtap="closePlayTip"></image>
+            </view>
+            <view class="set-up"  catchtap="beisu" wx:if="{{!showBeisuMask}}">
+                <van-icon name="setting-o" color="white" size="20"/>
+            </view>
+            <cover-view class="beisu-box" wx:if="{{showBeisuMask}}" style="height:{{rateHeight}}px;">
+                <cover-view class="beisu-item-box">播放速度
+                    <block wx:for="{{rateArr}}" wx:key="key">
+                        <cover-view class="beisu-item {{currentRate == index ? 'beisu-item-active' : ''}}"
+                            data-index="{{index}}" data-rate="{{item}}" catchtap="chooseRatePlay">
+                            {{item}}X
+                        </cover-view>
+                    </block>
+                </cover-view>
+            </cover-view>
+        </view>
+
+        <view class="lesson-info" hover-class="none" hover-stop-propagation="false">
+            <view class="lesson-title">
+                <text>{{courseInfo.courseTitle}}</text>
+                <block wx:if="{{ courseInfo.isBand }}">
+                    <view bindtap="subscribeBind" class="nosubscribe">
+                        <image src="/images/nosound.png"></image>{{seriesPage.subscribed}}
+                    </view>
+                </block>
+                <block wx:if="{{ !courseInfo.isBand }}">
+                    <view wx:if="{{ !courseInfo.isAllowBand }}" class="nosubscribe">
+                        <image src="/images/nosound.png"></image>{{seriesPage.subscribe}}
+                    </view>
+                    <view wx:if="{{courseInfo.isAllowBand && !courseInfo.isBand}}" bindtap="subscribe"
+                        class="subscribe">
+                        <image src="/images/sound.png"></image>{{seriesPage.subscribe}}
+                    </view>
+                </block>
+            </view>
+            <view class="lesson-level">
+                <block>{{courseInfo.sectionList.length}} Chapters | </block>
+                <block>{{classCount}} Classes | </block> Length {{courseInfo.courseDuration}}
+            </view>
+
+            <!-- 课程信息 -->
+            <view class="lesson-tip">Course Introduction</view>
+            <view class="lesson-time">
+                <text>{{courseInfo.intro}}</text>
+            </view>
+
+            <!-- 导师信息 -->
+            <view class="mentor-box" wx:if="{{courseInfo.authorList.length > 0}}">
+                <text class="mentor-title">{{seriesPage.mentor}}</text>
+                <view class="mentor-info" wx:if="{{courseInfo.authorList.length > 0}}"
+                    wx:for="{{courseInfo.authorList}}" wx:key="key" wx:for-item="authorInfo">
+                    <view wx:if="{{authorInfo.imgUrl}}" class="mentor-cover"
+                        style="background-image: url({{authorInfo.imgUrl}});"></view>
+                    <view class="mentor-info-right">
+                        <view class="mentor-name">{{authorInfo.authorName}}</view>
+                        <image mode="heightFix" wx:if="{{authorInfo.companyLogo}}" class="conpany-logo"
+                            src="{{authorInfo.companyLogo}}"></image>
+                        <view wx:if="{{info !='' }}" class="mentor-intro" wx:for="{{authorInfo.introArr}}" wx:key="key"
+                            wx:for-item="info">
+                            <view wx:if="{{info !='' }}" class="red-circle"></view>
+                            <text wx:if="{{info !='' }}">{{info}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="course-list-box">
+            <view class="course-list-title" bindtap="showList">
+                <text>Course Outline</text>
+                <image src="/images/xiala2.png" class="downIcon {{isShowList ? 'list-add-open':''}}"></image>
+            </view>
+            <view class="course-list-content">
+                <view>
+                    <van-collapse custom-class="course-item-box-big" value="{{ activeName }}" catch:change="onChange"
+                        v-model="activeName" catch:close="onClose" catch:open="onOpen">
+                        <block wx:for="{{sectionList}}" wx:key="key" wx:for-item="section" wx:for-key="bindex">
+                            <van-collapse-item title="{{section.sectionName}}" name="{{index}}"
+                                value="{{section.currentTimeCount == index ? section.videoTimeCount :''}}">
+                                <block wx:for="{{section.lessonList}}" wx:key="key" wx:for-item="lesson"
+                                    wx:for-index="lindex">
+                                    <block wx:if="{{lesson.lessonType == 'video'}}">
+                                        <view wx:if="{{lesson.videoPublic == 1}}"
+                                            class="course-item-box-small {{lessionId == lesson.lessonId ? 'videoPlaying':''}}"
+                                            bindtap="canplay" data-lid="{{lesson.lessonId}}" data-lindex="{{lindex}}">
+                                            <view class="course-item-box-small-left">
+                                                <image
+                                                    src="/images/icon-{{lessionId == lesson.lessonId ? 'playing':'play'}}.png">
+                                                </image><text>{{lesson.videoTitle}}</text>
+                                            </view>
+                                            <view class="course-item-box-small-right">
+                                                <text wx:if="{{lesson.finishPlay == 1}}">{{seriesPage.viewed}}</text>
+                                                <text wx:elif="{{lesson.finishPlay == 0 && lesson.timeNode != 0 && lesson.timeNode != undefined}}">{{seriesPage.stoppedAt}}{{lesson.timeNode}}</text>
+                                                <text wx:elif="{{lesson.finishPlay =='' && lesson.timeNode == 0}}">{{seriesPage.noStart}}</text>
+                                                <block wx:else>
+                                                    <text wx:if="{{courseInfo.isBand}}">{{seriesPage.noStart}}</text>
+                                                </block>
+                                                <text>{{lesson.videoDuration}}</text>
+                                            </view>
+                                        </view>
+                                        <view wx:if="{{lesson.videoPublic == 0}}" class="course-item-box-small"
+                                            bindtap="quanxian" data-lid="{{lesson.lessonId}}" data-lindex="{{lindex}}">
+                                            <view class="course-item-box-small-left">
+                                                <image src="/images/icon-quanxian.png"></image>
+                                                <text>{{lesson.videoTitle}}</text>
+                                            </view>
+                                            <view class="course-item-box-small-right">
+                                                <text wx:if="{{lesson.timeNode != 0 && lesson.timeNode != undefined}}">{{seriesPage.stoppedAt}}{{lesson.timeNode}}</text><text>{{lesson.videoDuration}}</text>
+                                            </view>
+                                        </view>
+                                    </block>
+                                    <!-- 文件预览 -->
+                                    <block wx:elif="{{lesson.lessonType == 'document'}}">
+                                        <view wx:if="{{lesson.videoPublic == 1}}" class="course-item-box-small" data-title="{{lesson.videoTitle}}" bindtap="openFile" data-id="{{lesson.lessonId}}">
+                                            <view class="course-item-box-small-left">
+                                                <image style="width: 21rpx;height:26rpx;" src="/images/icon-file.png"></image>
+                                                <text>{{lesson.videoTitle}}</text>
+                                            </view>
+                                            <view class="course-item-box-small-right">
+                                                <text>{{lesson.docType}}</text>
+                                            </view>
+                                        </view>
+                                        <view wx:if="{{lesson.videoPublic == 0}}" class="course-item-box-small">
+                                            <view class="course-item-box-small-left">
+                                                <image src="/images/icon-quanxian.png"></image>
+                                                <text>{{lesson.videoTitle}}</text>
+                                            </view>
+                                            <view class="course-item-box-small-right">
+                                                <text>{{lesson.docType}}</text>
+                                            </view>
+                                        </view>
+                                    </block>
+                                </block>
+                            </van-collapse-item>
+                        </block>
+                    </van-collapse>
+                </view>
+            </view>
+        </view>
+
+        <view class="mask" wx:if="{{ showNosubscribe  }}" bindtap="hideModal"> </view>
+        <view class="nosubscribe-box" wx:if="{{showNosubscribe}}">
+            <text class="nosubscribe-title">仅限部分学员</text>
+            <view class="nosubscribe-button" bindtap="hideModal">cancel</view>
+        </view>
+
+        <van-popup show="{{ showModal }}" round position="bottom" z-index="9"
+            custom-style="height: 687rpx;margin-top:{{navHeight}}px" bind:close="onCloseModal">
+            <image class="pop-ups-close-image" bindtap="onCloseModal" src="/images/close-btn.png"></image>
+            <view class="pop-ups">
+                <image class="pop-up-image" src="cloud://wallstreettequila-hqja3.7761-wallstreettequila-hqja3-1304653337/subscribe.png">
+                </image>
+                <text class="pop-up-text">订阅此系列课需花费您 1 Tequila Shot录播课时</text>
+                <view class="pop-up-button">
+                    <view class="dingyue-btn" bindtap="dingyue">{{seriesPage.subscribe}}</view>
+                </view>
+            </view>
+        </van-popup>
+    </view>
+    <view class="loading-box" wx:else>
+        <tui-loadmore visible="{{true}}" index="1" type="primary" text="Loading"></tui-loadmore>
+    </view>
+</view>

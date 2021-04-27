@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "tui-modal":"/miniprogram_npm/thorui/modal/modal",
+    "tui-button": "/miniprogram_npm/thorui/button/button"
+  },
+  "navigationBarTitleText": "申请详情",
+  "navigationBarBackgroundColor": "#407dce",
+  "navigationBarTextStyle": "white"
+}

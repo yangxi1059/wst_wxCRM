@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "Streaming",
+  "usingComponents": {
+    "van-popup": "/components/dist/popup/index",
+    "van-loading": "/components/dist/loading/index",
+    "van-icon": "/components/dist/icon/index"
+  }
+}

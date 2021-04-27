@@ -1,0 +1,71 @@
+.index-page {
+  width: 710rpx;
+  margin: 0 auto;
+}
+
+.banner-box {
+  width: 710rpx;
+  margin: 20rpx auto;
+  height: 280rpx;
+}
+
+.home-swiper {
+  width: 100%;
+  height: 360rpx;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  height: 280rpx;
+}
+
+.banner-box image {
+  width: 100%;
+  border-radius: 20rpx;
+}
+
+.grid-box {
+  width: 100%;
+  height: fit-content;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.grid-item {
+  padding: 30rpx 0;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color: #575656;
+}
+
+/* .grid-item:last-child{
+  margin-top: 55rpx;
+} */
+
+.grid-item image {
+  width: 65rpx;
+  height: 65rpx;
+  margin-bottom: 20rpx;
+}
+
+.manage-box {
+  margin-top: 30rpx;
+  width: 670rpx;
+  height: fit-content;
+  background-color: #fff;
+  padding: 32rpx 20rpx 0rpx 20rpx;
+  border-radius: 15rpx;
+}
+
+.manage-title {
+  font-family: PingFangSC-Medium, PingFang SC;
+  padding-left: 28rpx;
+  font-size: 28rpx;
+}

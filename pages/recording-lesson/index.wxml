@@ -1,0 +1,122 @@
+<view class="page" wx:if="{{!isLoading}}">
+
+        <view class="tab-box">
+            <view class="tabBox">
+                <block wx:for="{{tabData}}" wx:key="index">
+                    <view class="tab-item" data-current="{{index}}" bindtap="swichNav">
+                        <image class="{{item.iconClass}}" src="{{currentTab==index ? item.iconFill : item.icon}}" />
+                        <text style="color:{{currentTab == index ? '#fff' : '#363B3E'}}">{{item.name}}</text>
+                    </view>
+                </block>
+            </view>
+            <view class="weui-navbar-slider on{{currentTab}}" style="transform:translateX({{slideOffset}}px);"></view>
+        </view>
+
+        <view class="select-box-big">
+            <view class="select-box" bindtap="showSelectList" wx:if="{{currentTab == 0}}">
+                <view class="select-left">
+                    <view class="left-image-box">
+                        <image class="{{selectCurrentObj.iconClass}}" src="{{selectCurrentObj.icon}}" />
+                    </view>
+                    <text>{{selectCurrentObj.name}}</text>
+                </view>
+                <view class="select-right">
+                    <image class="icon-up {{showSelectList ? 'icon-down' :''}}" src="/images/xiala.png" />
+                </view>
+            </view>
+
+            <view class="fieldClass">
+                <view class="tui-searchbox" bindtap="toSearch">
+                    <view class="tui-search-input">
+                        <icon type="search" size="13" color="#333"></icon>
+                        <input disabled="true" placeholder="{{seriesPage.search}} " placeholder-class="tui-input-plholder"
+                            class="tui-input" />
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="select-list" wx:if="{{showSelectList}}">
+            <view wx:for="{{itemTab}}" wx:key="key" class="select_one" bindtap="swichItem" data-item="{{item.id}}"
+                data-name="{{item.name}}">
+                <view class="select-left">
+                    <view class="left-image-box">
+                        <image class="{{item.iconClass}}" src="{{item.icon}}"></image>
+                    </view>
+                    <text>{{item.name}}</text>
+                </view>
+            </view>
+        </view>
+
+        <view class="comment" wx:if="{{dataList.length > 0}}" >
+            <view class="index-page" animation="{{animation}}" wx:for="{{dataList}}" wx:key="index" bindtap="switchDetail"
+                data-cid="{{item.courseId}}" data-status="{{item.status}}" data-statusname="{{item.status}}">
+                <view class="lesson-title"><text>{{item.courseTitle}}</text></view>
+                <view class="lesson-level">
+                    <text class="">{{seriesPage.level}} : </text>
+                    <block wx:for="{{item.difficultyLevel}}" wx:key="index">
+                        <image src="/images/level-fill (1).png"></image>
+                    </block>
+                    <block wx:for="{{ 5 - item.difficultyLevel}}" wx:key="index">
+                        <image src="/images/level-fill (2).png"></image>
+                    </block>
+                    <text style="margin-left: 15rpx;">{{item.difficultyLevel}}/5</text>
+                </view>
+                <view class="lesson-cover-info">
+                    <image class="lesson-cover-img" mode="aspectFill" lazy-load="true" src="{{item.coverUrl}}"></image>
+                    <view class="mask"></view>
+                    <view class="lesson-cover-box">
+                        <block wx:if="{{index < 2}}" wx:for="{{item.tags}}" wx:key="key" wx:for-item="tag">
+                            <text class="lesson-cover-lable" wx:if="{{tag}}">{{tag}}</text>
+                        </block>
+                    </view>
+                    <view class="lesson-cover-text-right">
+                        <!-- vip权限 -->
+                        <block wx:if="{{item.status == 'vip'}}">
+                            <image src="/images/编组 18@2x.png"></image>{{seriesPage.vipOnly}}
+                        </block>
+                        <!-- 部分可试听 -->
+                        <block wx:if="{{item.status == 'bufen' }}">
+                            <image src="/images/bfkst.png"></image>{{seriesPage.trialClassAvailable}}
+                        </block>
+                        <!-- 游客可观看 -->
+                        <block wx:if="{{item.status == 'visitor'}}">
+                            <image src="/images/ykkgk.png"></image>{{seriesPage.publicAccess}}
+                        </block>
+                    </view>
+                    <view catchtap="btn">
+                        <button open-type="share" class="lesson-share" data-cid="{{item.courseId}}"
+                            data-img="{{item.coverUrl}}" data-title="{{item.courseTitle}}">
+                            <view class="share-icon-box">
+                                <image src="/images/share-white.png"></image>
+                            </view>
+                            <text>Share</text>
+                        </button>
+                    </view>
+                </view>
+                <view class="lesson-info" hover-class="none" hover-stop-propagation="false">
+                    <view class="lesson-time">
+                        <view class="">
+                            <text>{{item.sectionCount}}</text>
+                            <block wx:if="{{seriesPage.chapter != 'Chapter'}}">{{seriesPage.chapter}}</block>
+                            <block wx:else>{{item.sectionCount > 1 ? 'Chapters' : 'Chapter'}}</block>
+                            <text>{{item.videoCount}}</text>
+                            <block wx:if="{{seriesPage.class != 'Class'}}">{{seriesPage.class}}</block>
+                            <block wx:else>{{item.videoCount > 1 ? 'Classes' : 'Class'}}</block>
+                        </view>
+                        <view class="">{{seriesPage.length}}:<text>{{item.videoDurationTotal}}</text></view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="nodata" wx:if="{{dataList.length == 0}}">
+            <image class="nodata-img" src="/images/nodata.png"></image>
+            <text class="nodata-text">{{seriesPage.noData}}</text>
+        </view>
+
+</view>
+
+<view class="loading-box" wx:else>
+    <tui-loadmore visible="{{true}}" index="1" type="primary" text="Loading"></tui-loadmore>
+</view>

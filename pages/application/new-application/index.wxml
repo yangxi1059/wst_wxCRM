@@ -1,0 +1,26 @@
+<view class="index-page">
+    <view class="white-box">
+        <view class="box-title">业务管理</view>
+        <van-grid column-num="3">
+            <block wx:for="{{menuList}}" wx:key="key">
+                <van-grid-item 
+                    icon="{{item.icon}}" 
+                    text="{{item.text}}" 
+                    link-type="navigateTo"
+                    square="true"
+                    url="/pages/application/new-application/insert-{{item.url}}/index"
+                />
+            </block>
+        </van-grid>
+    </view>
+
+    <view class="white-box">
+        <view class="box-title">人事</view>
+        <van-grid column-num="3">
+            <block wx:for="{{renshi}}" wx:key="key">
+                <van-grid-item icon="{{item.icon}}" text="{{item.text}}" bind:click="switchPage"/>
+            </block>
+        </van-grid>
+    </view>
+
+</view>

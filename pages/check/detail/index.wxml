@@ -1,0 +1,52 @@
+<view class="index-page">
+    <view class="apply-box">
+        <view class="apply-user">
+            <image src="/images/default-img.png"></image>
+            <text>{{apply.createByName}}的{{apply.applyTypeName}}</text>
+            <view class="apply-status wait" wx:if="{{apply.applyStatus == 0}}" >待申请</view>
+            <view class="apply-status wait" wx:if="{{apply.applyStatus == 1}}" >待审核</view>
+            <view class="apply-status passed" wx:if="{{apply.applyStatus == 2}}">已通过</view>
+            <view class="apply-status refuse" wx:if="{{apply.applyStatus == 3}}">已拒绝</view>
+            <view class="apply-status cancel" wx:if="{{apply.applyStatus == 6}}">已取消</view>
+        </view>
+        <view class="apply-info">
+            <text class="apply-info-text">申请详情</text>
+            <view class="row-box" wx:for="{{content.text}}" wx:key="key">
+                <text class="info-key">{{item.label}}</text>
+                <text class="info-value">{{item.value}}</text>
+            </view>
+            <view class="row-box" wx:if="{{content.file.length > 0}}">
+                <text class="info-key">文件</text>
+                <view class="image-list">
+                    <block wx:for="{{content.file}}" wx:key="key">
+                        <view class="image-box" data-url="{{item.url}}" bindtap="toPreview">{{item.name}}</view>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="check-box" wx:if="{{approval.length > 0 || copyTo.length > 0}}">
+        <text class="check-box-text">审批流程</text>
+        <view class="man-box" wx:if="{{approval.length > 0}}">审核人
+            <view class="man" >
+                <view wx:for="{{approval}}" wx:key="key"> {{item.approverName}} - 
+                    <text wx:if="{{item.approveStatus == 0}}" class="wait-text">待审核</text>
+                    <text wx:if="{{item.approveStatus == 1}}" class="pass-text">已通过</text>
+                    <text wx:if="{{item.approveStatus == 2}}" class="refuse-text">已拒绝 </text>{{item.msg ? '('+item.msg+')' : ''}}
+                </view>
+            </view>
+        </view>
+        <view class="man-box" wx:if="{{copyTo.length > 0}}">
+            <text>抄送人</text>
+            <view class="man">
+                <view wx:for="{{copyTo}}" wx:key="key">{{item.copyToName}}</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="button-box" wx:if="{{apply.applyType =='vacate' || apply.applyType == 'overtime_working' || apply.applyType == 'purchase' || apply.applyType == 'recommend_bonus'}}">
+        <view bindtap="onRefuse">驳回</view>
+        <view bindtap="onConfirm">确认</view>
+    </view>
+</view>
+

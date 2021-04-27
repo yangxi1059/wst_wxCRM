@@ -1,0 +1,172 @@
+<view wx:if="{{!isLoading}}">
+
+
+    <view class="index-page {{ toudi ? 'index-fixed': ''}}">
+        <view class="detail-top">
+            <view class="detail-top-box">
+                <image wx:if="{{jobInfo.logo}}" class="company-logo" src="{{jobInfo.logo}}" mode="aspectFit"></image>
+                <view class="company-info">
+                    <text class="company-info-up">{{jobInfo.companyName}}</text>
+                    <text class="company-info-down">{{jobInfo.createTime}} | {{jobInfo.deadLine}} | {{jobInfo.cityName}}{{jobInfo.countryName != null && jobInfo.cityName != null ? ',' : ''}}{{jobInfo.countryName}}</text>
+                </view>
+            </view>
+        </view>
+
+        <view class="detail-center">
+            <text class="title">{{jobInfo.jobName}}</text>
+            <view class="lable">
+                <block wx:for="{{lableList}}" wx:key="key">
+                    <view class="lable-item">
+                        <text>{{item.name}}</text>
+                        <text>{{item.value}}</text>
+                    </view>
+                </block>
+                <view class="lable-three">
+                    <text>Track Name：</text>
+                    <text>{{jobInfo.tracksName}}</text>
+                </view>
+            </view>
+            <view class="content-title">
+                <text>Job Requirements：</text>
+            </view>
+            <view class="content">{{jobInfo.jobRequirements}}</view>
+            <view class="content-title">
+                <text>Job Descriptions：</text>
+            </view>
+            <view class="content">{{jobInfo.jobInformation}}</view>
+        </view>
+
+
+        <!-- 投递简历 弹窗 -->
+        <view class="mask" wx:if="{{ progress}}" bindtap="cancle"></view>
+
+        <van-popup show="{{ toudi }}" round position="bottom" z-index="999" custom-style="height: 1000rpx"
+            bind:close="cancle">
+            <view class="pop-up">
+                <view class="pop-up-top">
+                    <view class="pop-up-title">
+                        <text>{{referralsDetailPage.toudiTitle}}</text>
+                        <image bindtap="cancle" src="/images/close-btn.png"></image>
+                    </view>
+                </view>
+                <view class="pop-up-center">
+                    <view class="popup-center">
+                        <view class="fill-box">
+                            <view class="fill-title">{{referralsDetailPage.availableDuration}}</view>
+                            <picker class="fill-content" bindchange="pickerEntrytime" range="{{array}}"
+                                value="{{entryTimeIndex}}">
+                                <image src="/images/xiala_grey.png"></image>
+                                {{array[entryTimeIndex]}}
+                            </picker>
+                        </view>
+                        <view class="fill-box">
+                            <view class="fill-title">{{referralsDetailPage.availablePeriod}}</view>
+                            <view class="picker-box">
+                                <picker class="fill-content" mode="date" value="{{date}}" bindchange="pickerStarttime">
+                                    <image src="/images/xiala_grey.png"></image>
+                                    {{startDate}}
+                                </picker>
+                                <picker class="fill-content" mode="date" value="{{date}}" start="{{startDate}}"
+                                    bindchange="pickerEndtime">
+                                    <image src="/images/xiala_grey.png"></image>
+                                    {{endDate}}
+                                </picker>
+                            </view>
+                        </view>
+                        <view class="fill-box">
+                            <view class="fill-title">{{referralsDetailPage.currentlyResidein}}</view>
+                            <view class="fill-content" bindtap="showCountryContent">
+                                <image src="/images/xiala_grey.png"></image>
+                                <text>{{contryValue}}</text>
+                                <view class="select-content country" wx:if="{{showCountryContent}}">
+                                    <block wx:for="{{country}}" wx:key="key">
+                                        <view catchtap="pickerCountry" data-index="{{index}}" data-cvalue="{{item}}">
+                                            {{item}}</view>
+                                    </block>
+                                </view>
+                            </view>
+
+                            <view class="city-box">
+                                <view class="picker-box">
+
+                                    <view class="fill-content" bindtap="showProvinceContent">
+                                        <image src="/images/xiala_grey.png"></image>
+                                        <text>{{provinceValue}}</text>
+                                        <view class="select-content" wx:if="{{showProvinceContent}}">
+                                            <block wx:for="{{province}}" wx:key="key">
+                                                <view catchtap="pickerProvince" data-cityid="{{index}}"
+                                                    data-pvalue="{{item.n}}">{{item.n}}</view>
+                                            </block>
+                                        </view>
+                                    </view>
+                                    <view class="fill-content" bindtap="showAreaContent">
+                                        <image src="/images/xiala_grey.png"></image>
+                                        <text>{{areaValue}}</text>
+                                        <view class="select-content" wx:if="{{showAreaContent}}">
+                                            <block wx:for="{{area}}" wx:key="key">
+                                                <view catchtap="pickerArea" data-aid="{{index}}"
+                                                    data-avalue="{{item.n}}">{{item.n}}</view>
+                                            </block>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+
+                        <view class="fill-box">
+                            <view class="fill-title">{{referralsDetailPage.graduationYear}}</view>
+                            <picker class="fill-content" bindchange="pickerGraduationTime" range="{{graduationYear}}"
+                                value="{{index}}">
+                                <image src="/images/xiala_grey.png"></image>
+                                {{graduationYear[graduationYearIndex]}}
+                            </picker>
+                        </view>
+
+                        <view class="fill-box-line">
+                            <text class="fill-title">{{referralsDetailPage.isYes}}</text>
+                            <view class="fill-checkbox">
+                                <van-checkbox style="margin-left: 20rpx;" value="{{ ischecked }}"
+                                    checked-color="#94CDDA" bind:change="onChange" shape="square"></van-checkbox>
+                            </view>
+                        </view>
+                        <view class="fill-box-cloum">
+                            <view class="fill-title">{{referralsDetailPage.selectResume}}</view>
+                            <view class="resume-box {{currentResume == index ? 'selectBox':''}}" wx:for="{{resumeList}}"
+                                wx:key="key" bindtap="checkResume" data-index="{{index}}">
+                                <view class="resume-left-box">
+                                    <image
+                                        src="{{item.type == 'word' ? '/images/files icon-DOCX@2x.png' : '/images/files icon-PDF@2x.png'}}">
+                                    </image>
+                                    <view class="filename-box">
+                                        <text>{{item.fileName}}</text>
+                                        <text>{{item.createTime}}</text>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+
+            </view>
+
+        </van-popup>
+
+        <view wx:if="{{toudi}}" class="button-box-bottom">
+            <view class="button-toudi" bindtap="toudi">{{referralsDetailPage.send}}</view>
+        </view>
+
+    </view>
+
+    <!-- 按钮 -->
+    <view class="button-box" wx:if="{{!toudi }}">
+        <view class="button-right" bindtap="delivery">
+            <image wx:if="{{!delivery}}" src="/images/toudi.png"></image>
+            <image wx:else src="/images/toudi-active.png"></image>
+            <text>{{referralsDetailPage.submit}}</text>
+        </view>
+    </view>
+</view>
+
+<view class="loading-box" wx:else>
+    <van-loading size="24px" vertical type="spinner">Loading...</van-loading>
+</view>

@@ -1,0 +1,54 @@
+page {
+    width: 100%;
+    height: 100%;
+    background-color: #F5F6F7;
+}
+
+.book-box {
+    width: 620rpx;
+    margin: 50rpx auto 0rpx auto;
+    background-color: #fff;
+    box-shadow: 0px 10rpx 20rpx 0rpx rgba(165, 181, 196, 0.1);
+    border-radius: 6rpx;
+    padding: 40rpx 0rpx 20rpx 0rpx;
+}
+
+.book-cover {
+    display: block !important;
+    margin: 0rpx auto;
+ 
+}
+
+.book-name {
+    width: fit-content;
+    margin: 35rpx auto 0rpx auto;
+    font-size: 28rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: #363B3E;
+}
+
+.book-detail {
+    width: 80%;
+    margin: 18rpx auto;
+    text-align: center;
+    line-height: 37rpx;
+    font-size: 22rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #898989;
+}
+
+.button {
+    margin: 60rpx auto;
+    width: 500rpx;
+    height: 75rpx;
+    background: linear-gradient(90deg, #BEDBE1 0%, #94CDDA 100%);
+    border-radius: 6rpx;
+    font-size: 24rpx;
+    font-family: Helvetica;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 75rpx;
+}
+

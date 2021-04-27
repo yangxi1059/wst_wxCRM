@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "tui-icon":"../../miniprogram_npm/thorui/icon/icon"
+  },
+  "navigationBarTitleText": "Search"
+}

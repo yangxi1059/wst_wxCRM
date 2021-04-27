@@ -1,0 +1,52 @@
+<view class="index-page" wx:if="{{!isLoading}}">
+    <view class="detail-top">
+        <view class="detail-top-box">
+            <image wx:if="{{jobInfo.logo}}" class="company-logo" src="{{jobInfo.logo}}" mode="aspectFit"></image>
+            <view class="company-info">
+                <text class="company-info-up">{{jobInfo.companyName}}</text>
+                <text class="company-info-down">{{jobInfo.createTime}} | {{jobInfo.deadLine}}  | {{jobInfo.cityName}}{{jobInfo.countryName != null && jobInfo.cityName != null ? ',' : ''}}{{jobInfo.countryName}}</text>
+            </view>
+        </view>
+
+    </view>
+
+    <view class="detail-center">
+        <text class="title">{{jobInfo.jobName}}</text>
+        <view class="lable">
+            <block wx:for="{{lableList}}" wx:key="key">
+                <view class="lable-item">
+                    <text>{{item.name}}</text>
+                    <text>{{item.value}}</text>
+                </view>
+            </block>
+           <view class="lable-three" style="width:{{ over ?  lableWidth : ''}}rpx">
+                <text>Track Name：</text>
+                <text>{{jobInfo.tracksName}}</text>
+            </view>
+        </view>
+
+        <view class="content-title">
+            <!-- <image src="/images/gwxx.png"></image> -->
+            <text>Job Requirements：</text>
+        </view>
+        <view class="content">{{jobInfo.jobRequirements}}</view>
+        <view class="content-title">
+            <!-- <image src="/images/gwxx.png"></image> -->
+            <text>Job Descriptions：</text>
+        </view>
+        <view class="content">{{jobInfo.jobInformation}}</view>
+
+
+    </view>
+
+    <view class="urlcontent-title"  bindlongpress="copy" data-copy="{{jobInfo.jobUrl}}">
+        <image src="/images/tdlj.png"></image>
+        <text class="urlcontent" >投递链接：{{jobInfo.jobUrl}}</text>
+    </view>
+    <text class="pressLongText">长按复制链接</text>
+</view>
+
+<view class="loading-box" wx:else>
+    <van-loading size="24px" vertical type="spinner">Loading...</van-loading>
+ </view>
+ 

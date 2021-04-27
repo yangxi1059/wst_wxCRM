@@ -1,0 +1,76 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/index",
+    "pages/mine/my",
+    "pages/check/index",
+    "pages/check/detail/index",
+    "pages/application/index",
+    "pages/application/detail/index",
+    "pages/application/new-application/index",
+    "pages/application/new-application/insert-reimbursement/index",
+    "pages/application/new-application/insert-vacate/index",
+    "pages/recording-lesson/index",
+    "pages/recording-lesson/detail/index",
+    "pages/choose-language/index",
+    "pages/personal-information/index",
+    "pages/live-lesson/index",
+    "pages/live-lesson/detail/index",
+    "pages/preview-file/index",
+    "pages/book-shelf/index",
+    "pages/book-shelf/detail/index",
+    "pages/book-shelf/search/index",
+    "pages/book-shelf/play-video/index",
+    "pages/referral-application/index",
+    "pages/referral-application/details/index",
+    "pages/onsite-seminar/index",
+    "pages/interview-database/index",
+    "pages/interview-database/detail/index",
+    "pages/online-application/index",
+    "pages/online-application/detail/index",
+    "pages/sales-situation/index",
+    "pages/application/new-application/insert-overtime/index",
+    "pages/application/new-application/insert-purchase/index",
+    "pages/application/new-application/insert-bonus/index",
+    "pages/recording-lesson/file-preview/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WST CRM",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "backgroundColor": "#fff",
+    "borderStyle": "white",
+    "selectedColor": "#C32E47",
+    "color": "#666666",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "selectedIconPath": "images/home2.png",
+        "iconPath": "images/home.png",
+        "text": "Home"
+      },
+      {
+        "pagePath": "pages/recording-lesson/index",
+        "selectedIconPath": "images/lesson2.png",
+        "iconPath": "images/lesson.png",
+        "text": "Series"
+      },
+      {
+        "pagePath": "pages/live-lesson/index",
+        "selectedIconPath": "images/luxiang_fill.png",
+        "iconPath": "images/luxiang.png",
+        "text": "Streaming"
+      },
+      {
+        "pagePath": "pages/mine/my",
+        "selectedIconPath": "images/wode2.png",
+        "iconPath": "images/wode.png",
+        "text": "Mine"
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+<view class="index-page">
+    <view class="login-box">
+        <image class="icon-logo" src="/images/code-logo.png"></image>
+        <text class="login-text">A Premier Full-Service Career Consulting Company</text>
+
+        <button wx:if="{{canUseProfile}}" class="btn-login" bindtap="getUserInfo">
+            <image src="/images/icon-weixin-white.png"></image>
+            <text>WeChat login</text>
+        </button>
+
+        <button wx:else class="btn-login" open-type="getUserInfo" bindgetuserinfo="huoquUserInfo">
+            <image src="/images/icon-weixin-white.png"></image>
+            <text>WeChat login</text>
+        </button>
+    </view>
+    <tui-tips id="toast"></tui-tips>
+</view>

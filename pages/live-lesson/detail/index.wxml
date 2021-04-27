@@ -1,0 +1,210 @@
+<view class="index-page" wx:if="{{!isLoading}}">
+    <!-- 录播回放 -->
+    <view class="fixed-box" wx:if="{{versionFlag == 1}}">
+        <block wx:if="{{vedioType == 'video'}}">
+            <block wx:if="{{isSubscribe}}">
+                <video id="video" class="live-box" src="{{playUrl}}" autoplay="{{true}}" poster="{{liveInfo.liveCover}}"
+                    binderror="playError" bindfullscreenchange="fullscreen" bindplay="playStart" bindpause="playPause"  bindtap="clickVideo">
+                    <view class="marquee_box">
+                        <view class="marquee_text"
+                            style="{{orientation}}:{{marqueeDistance}}px;font-size: {{size}}px;top:{{randomHeight}}rpx">
+                            {{waterMarkText}}
+                        </view>
+                    </view>
+                </video>
+                <view class="set-up"  catchtap="beisu" wx:if="{{!showBeisuMask}}">
+                    <van-icon name="setting-o" color="white" size="20"/>
+                </view>
+                <cover-view class="beisu-box" wx:if="{{showBeisuMask}}" style="height:{{rateHeight}}px;">
+                    <cover-view class="beisu-item-box">播放速度
+                        <block wx:for="{{rateArr}}" wx:key="key">
+                            <cover-view class="beisu-item {{currentRate == index ? 'beisu-item-active' : ''}}"
+                                data-index="{{index}}" data-rate="{{item}}" catchtap="chooseRatePlay">
+                                {{item}}X
+                            </cover-view>
+                        </block>
+                    </cover-view>
+                </cover-view>
+            </block>
+            <block wx:else>
+                <view class="no-live">
+                    <block wx:if="{{liveInfo.liveCover != null && liveInfo.liveCover != undefined}}">
+                        <view class="nolive-box">
+                            <image class="bg-live" src="{{liveInfo.liveCover}}" mode="aspectFill"></image>
+                            <view class="bg-live-mask"></view>
+                            <view wx:if="{{liveInfo.liveStatus == 2 }}" class="text-live">当前直播已结束，请耐心等待老师上传回放视频</view>
+                            <view wx:if="{{liveInfo.liveStatus == 0}}" class="text-live">直播未开始,具体时间在标题下方</view>
+                        </view>
+                    </block>
+                    <block wx:else>
+                        <view class="nolive-box-no">
+                            <image class="bg-live-no" src="/images/bg-liveMentoe_img.png" mode="aspectFill"></image>
+                            <view wx:if="{{liveInfo.liveStatus == 2 }}" class="text-live">当前直播已结束，请耐心等待老师上传回放视频</view>
+                            <view wx:if="{{liveInfo.liveStatus == 0}}" class="text-live">直播未开始,具体时间在标题下方</view>
+                        </view>
+                    </block>
+                </view>
+            </block>
+        </block>
+
+        <!-- 直播->是否订阅 -->
+        <block wx:if="{{vedioType == 'living'}}">
+            <block wx:if="{{liveInfo.liveStatus == 0 || liveInfo.liveStatus == 2}}">
+                <block wx:if="{{liveInfo.liveCover != null && liveInfo.liveCover != undefined}}">
+                    <view class="nolive-box">
+                        <image class="bg-live" src="{{liveInfo.liveCover}}" mode="aspectFill"></image>
+                        <view class="bg-live-mask"></view>
+                        <view wx:if="{{liveInfo.liveStatus == 2 }}" class="text-live">当前直播已结束，请耐心等待老师上传回放视频</view>
+                        <view wx:if="{{liveInfo.liveStatus == 0}}" class="text-live">直播未开始,具体时间在标题下方</view>
+                    </view>
+                </block>
+                <block wx:else>
+                    <view class="nolive-box-no">
+                        <image class="bg-live-no" src="/images/bg-liveMentoe_img.png" mode="aspectFill"></image>
+                        <view wx:if="{{liveInfo.liveStatus == 2 }}" class="text-live">当前直播已结束，请耐心等待老师上传回放视频</view>
+                        <view wx:if="{{liveInfo.liveStatus == 0}}" class="text-live">直播未开始,具体时间在标题下方</view>
+                    </view>
+                </block>
+            </block>
+            <block wx:if="{{liveInfo.liveStatus == 1}}">
+                <video id="myVideo" class="live-box" poster="{{liveInfo.liveCover}}" src="{{playUrl}}"
+                    controls="{{true}}" autoplay="{{true}}" show-fullscreen-btn="{{true}}"
+                    binderror="playError" bindfullscreenchange="fullScreenChange" bindplay="playStart" bindpause="playPause">
+                    <view class="marquee_box">
+                        <view class="marquee_text"
+                            style="{{orientation}}:{{marqueeDistance}}px;font-size: {{size}}px;top:{{randomHeight}}rpx">
+                            {{waterMarkText}}
+                        </view>
+                    </view>
+                </video>
+            </block>
+        </block>
+    </view>
+
+    <view class="fixed-swith-box">
+        <view class="swith-box">
+            <view class="live-tab">
+                <view class="live-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">
+                    {{streamingDetailPage.introduction}}
+                </view>
+                <view class="live-tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">
+                    {{streamingDetailPage.questions}}
+                </view>
+            </view>
+            <view class="weui-navbar-slider" style="transform:translateX({{slideOffset}}px);"></view>
+        </view>
+    </view>
+
+    <view class="index-contenx">
+        <view class="introduction-box" wx:if="{{currentTab == 0}}">
+            <view class="title-box">
+                <text class="title-text">{{liveInfo.liveTitle}}</text>
+                <block wx:if="{{willshowSubscribe}}">
+                    <!-- 订阅 -->
+                    <view class="title-button" bindtap="subscribe" wx:if="{{!liveInfo.isBand}}">
+                        <image src="/images/sound.png"></image><text>{{streamingDetailPage.subscribe}}</text>
+                    </view>
+                    <!-- 已订阅 -->
+                    <view class="title-button-band" wx:if="{{liveInfo.isBand}}">
+                        <image src="/images/nosound.png"></image><text>{{streamingDetailPage.subscribed}}</text>
+                    </view>
+                </block>
+            </view>
+            <view class="mentor-box" wx:if="{{liveInfo.isBand}}"> {{streamingDetailPage.mentor}}：{{liveInfo.liveBy}}</view>
+            <view class="time-box">{{liveInfo.planTime}} |
+                {{liveInfo.liveStatus == 0 ? streamingDetailPage.noStart :''}}{{liveInfo.liveStatus == 2 ? streamingDetailPage.ended :''}}
+            </view>
+            <view class="mentor-box" wx:if="{{liveInfo.tagArr.length > 0}}">{{streamingDetailPage.tags}}：
+                <block wx:for="{{liveInfo.tagArr}}" wx:key="key" wx:for-item="tags">
+                    <view class="tag-item">{{tags.tagName}}</view>
+                </block>
+            </view>
+            <view class="mentor-box" wx:if="{{liveInfo.difficultyLevel}}">{{streamingDetailPage.diffcultyLevel}}：
+                <block wx:for="{{liveInfo.difficultyLevel}}" wx:key="lindex">
+                    <image src="/images/level-fill (1).png"></image>
+                </block>
+                <block wx:for="{{ 5 - liveInfo.difficultyLevel}}" wx:key="index">
+                    <image src="/images/level-fill (2).png"></image>
+                </block>
+            </view>
+            <view class="course-intro">
+                <view class="intro-title">Course Introduction</view>
+                <text class="intro-content">{{liveInfo.liveIntro}}</text>
+            </view>
+
+            <!-- 证书 -->
+            <!-- <view class="certificate-box" wx:if="{{liveInfo.medalList.length > 0}}">
+                <view class="certificate-top">
+                    <view>Certificate（{{liveInfo.medalList.length}}）</view>
+                </view>
+                <view class="certificate-center">
+                    <scroll-view class="scroll-view" scroll-x="true" lower-threshold="50">
+                        <view class="certificate">
+                            <block wx:for="{{liveInfo.medalList}}" wx:key="key">
+                                <view class="swiper-item" bindtap="showCertificateProgress" data-index="{{index}}"
+                                    data-mid="{{item.medalId}}">
+                                    <view class="icon-medal" style="background-image: url({{item.imgUrl}});"></view>
+                                    <text>{{item.medalName}}</text>
+                                </view>
+                            </block>
+                        </view>
+                    </scroll-view>
+                </view>
+            </view> -->
+
+            <!-- File -->
+            <view class="file-list-box" wx:if="{{liveInfo.coursewareList.length > 0 }}">
+                <view class="file-count">File（{{liveInfo.coursewareList.length}}）</view>
+                <view class="file-box" wx:for="{{liveInfo.coursewareList}}" wx:key="key" bindtap="previewFile"
+                    data-url="{{item.previewUrl}}">
+
+                    <image wx:if="{{item.type == 'pdf'}}" class="file-left" src="/images/files icon-PDF@2x.png"></image>
+                    <image wx:if="{{item.type == 'word'}}" class="file-left" src="/images/files icon-DOCX@2x.png">
+                    </image>
+                    <image wx:if="{{item.type == 'ppt'}}" class="file-left" src="/images/files icon-PPT@2x.png"></image>
+                    <view class="file-right"><text>{{item.fileName}}</text></view>
+                </view>
+            </view>
+        </view>
+
+        <view class="questions-box" wx:if="{{currentTab == 1}}">
+            <!-- 未定阅的问题列表 -->
+                <view class="no-log" >
+                    <image class="nolog-image"
+                        src="cloud://wallstreettequila-hqja3.7761-wallstreettequila-hqja3-1304653337/jpeg@2x.png">
+                    </image>
+                    <image class="nolog-quanxian" src="/images/lock.png"></image>
+                    <text class="nolog-text">{{streamingDetailPage.viewQuestions}}</text>
+                </view>
+        </view>
+    </view>
+
+
+    <van-popup show="{{ showSubscribe }}" round position="bottom" z-index="9999" custom-style="height: 720rpx"
+        bind:close="onClose">
+        <image class="pop-ups-close-image" bindtap="onClose" src="/images/close-btn.png"></image>
+        <view class="pop-ups">
+            <image class="pop-ups-image"
+                src="cloud://wallstreettequila-hqja3.7761-wallstreettequila-hqja3-1304653337/subscribe.png"></image>
+            <text class="pop-up-text">{{streamingDetailPage.subscribeText}}</text>
+            <view class="pop-up-button">
+                <view class="dingyue-btn" bindtap="dingyue">{{streamingDetailPage.subscribe}}</view>
+            </view>
+        </view>
+    </van-popup>
+
+    <van-popup show="{{ showPopup }}" round position="bottom" z-index="9999" custom-style="height: 544rpx"
+        bind:close="onClosePopup">
+        <image class="pop-ups-close-image" bindtap="onClosePopup" src="/images/close-btn.png"></image>
+        <view class="pop-ups">
+            <image class="pop-ups-image"
+                src="cloud://wallstreettequila-hqja3.7761-wallstreettequila-hqja3-1304653337/subscribed.png"></image>
+            <text class="pop-up-text">{{streamingDetailPage.loginText}}</text>
+        </view>
+    </van-popup>
+
+</view>
+
+<view class="loading-box" wx:else>
+    <van-loading size="24px" vertical type="spinner">Loading...</van-loading>
+</view>

@@ -1,0 +1,15 @@
+{
+  "usingComponents": {
+    "tui-icon":"/miniprogram_npm/thorui/icon/icon",
+    "van-datetime-picker": "/components/dist/datetime-picker/index",
+    "van-popup": "/components/dist/popup/index",
+    "van-picker": "/components/dist/picker/index",
+    "van-cell": "/components/dist/cell/index",
+    "van-cell-group": "/components/dist/cell-group/index",
+    "van-checkbox": "/components/dist/checkbox/index",
+    "van-checkbox-group": "/components/dist/checkbox-group/index"
+  },
+  "navigationBarTitleText": "加班",
+  "navigationBarBackgroundColor": "#407dce",
+  "navigationBarTextStyle": "white"
+}

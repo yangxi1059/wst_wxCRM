@@ -1,0 +1,54 @@
+<view class="container">
+  <view class="cover-box">
+    <image class="cover-img" src="/images/background.png" mode="aspectFit|aspectFill|widthFix"></image>
+    <view class="userInfo-box" bindtap="toLogin">
+      <block wx:if="{{isLogin == 1}}">
+        <image class="header-img" src="{{avatarUrl}}" mode="aspectFit" />
+        <view class="userInfo-text">
+          <text class="wx-id">{{userInfo.userName}}</text>
+          <text class="bind" catchtap="copy" wx:if="{{userInfo.userAcc}}" data-text="{{userInfo.refCode}}" >{{userInfo.userAcc}} (Ref Code: {{userInfo.refCode}})</text>
+          <text class="wx-id" wx:if="{{userInfo.nickName}}">{{userInfo.nickName}}</text>
+        </view>
+      </block>
+
+      <block wx:if="{{isLogin == 0}}">
+        <view class="default-headimg-box">
+          <image class="header-img-default" src="/images/default-headimg.png" mode="aspectFit" />
+        </view>
+        <view class="userInfo-text">
+          <text class="wx-id">{{language == 'english' ? 'Login' : '登录'}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="bottom-container">
+    <tui-view tui-view-class="tui-view">
+      <block wx:for="{{menuList}}" wx:key="key">
+        <tui-cell wx:if="{{item.isShow}}" bind:click="detail" data-index="{{index}}" data-url="{{item.url}}" arrow="{{true}}" tui-cell-class="tui-list">
+          <image class="" src="/images/{{item.icon}}.png"></image>
+          <text class="tui-cell-name">{{item.name}}<text wx:if="{{item.hasNew}}" class="newTag">NEW</text></text>
+          <view wx:if="{{item.right}}" class="tui-right">{{item.right}}</view>
+          <view wx:if="{{item.hasNew}}" class="tui-right newNum">{{item.newNum}}</view>
+        </tui-cell>
+      </block>
+    </tui-view>
+  </view>
+
+  <van-popup show="{{ showHistory}}"  position="right" z-index="999"
+    custom-style="height: 100%;width:56%" bind:close="closeHistory">
+    <block wx:for="{{historyList}}" wx:key="key">
+      <view class="history-item" bindtap="toVideoDetail" data-id="{{item.courseId}}"> 
+        <view class="video-cover-box">
+          <image class="video-cover" src="{{item.coverUrl}}" mode="aspectFill"></image>
+          <view class="mask"></view>
+          <view class="jindu">观看至：{{item.schedule}}</view>
+        </view>
+        <view class="video-title">{{item.courseTitle}}</view>
+      </view>
+    </block>
+  </van-popup>
+
+
+  <view class="version">{{language == 'english' ? 'Version' : '当前版本'}} {{version}}</view>
+</view>

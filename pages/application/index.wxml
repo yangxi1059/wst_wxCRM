@@ -1,0 +1,51 @@
+<view class="index-page" wx:if="{{!isLoading}}">
+    <view class="applyList-box" wx:if="{{applyList.length > 0}}">
+        <block wx:for="{{applyList}}" wx:key="key">
+            <view class="appliction-box" bindtap="toDetail" data-id="{{item.applyId}}">
+                <view class="apply-top">
+                    <text>{{item.applyId}}</text>
+                    <text wx:if="{{item.applyStatus == 0}}" class="wait">待申请</text>
+                    <text wx:if="{{item.applyStatus == 1}}" class="wait">待审核</text>
+                    <text wx:if="{{item.applyStatus == 2}}" class="passed">已通过</text>
+                    <text wx:if="{{item.applyStatus == 3}}" class="refuse">已拒绝</text>
+                    <text wx:if="{{item.applyStatus == 4}}" class="passed">待支付</text>
+                    <text wx:if="{{item.applyStatus == 5}}" class="passed">已支付</text>
+                    <text wx:if="{{item.applyStatus == 6}}" class="cancel">已取消</text>
+                </view>
+                <view class="apply-middle">
+                    <view class="apply-row">
+                        <text>申请标题：</text>
+                        <text>{{item.applyTitle}}</text>
+                    </view>
+                    <view class="apply-row">
+                        <text>申请时间：</text>
+                        <text>{{item.createTime}}</text>
+                    </view>
+                    <view class="apply-row">
+                        <text>申请类型：</text>
+                        <text>{{item.applyTypeName}}</text>
+                    </view>
+                </view>
+                <view class="apply-bootom" >
+                    <view class="more-box">
+                        <text>More Detail</text>
+                        <image src="/images/content-more.png"></image>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+
+    <view class="no-data" wx:else>
+        <image src="/images/img_noorder@3x.png"></image>
+        <text>暂无申请</text>
+    </view>
+
+    <view class="addApply-box">
+        <view class="addApply-btn" bindtap="toInsert">+</view>
+        <text class="addApply-text">Add</text>
+    </view>
+   
+</view>
+
+<tui-loadmore visible="{{isLoading}}" index="3" text="Loading"></tui-loadmore>

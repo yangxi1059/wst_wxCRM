@@ -1,0 +1,9 @@
+{
+  "navigationStyle":"custom",
+  "usingComponents": {
+    "van-loading": "/components/dist/loading/index",
+    "van-search": "/components/dist/search/index"
+  },
+  "navigationBarTitleText": "Interview DataBase"
+
+}

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "Mine",
+  "usingComponents": {
+     "tui-view":"../../miniprogram_npm/thorui/list-view/list-view",
+     "tui-cell":"../../miniprogram_npm/thorui/list-cell/list-cell",
+     "tui-icon":"../../miniprogram_npm/thorui/icon/icon",
+     "van-popup":"../../../components/dist/popup/index"
+  }
+}

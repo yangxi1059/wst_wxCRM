@@ -1,0 +1,13 @@
+{
+ 
+  "navigationBarTitleText":"Detail",
+  "usingComponents": {
+    "van-collapse": "../../../components/collapse/index",
+    "van-collapse-item": "../../../components/collapse-item/index",
+    "tui-loadmore": "../../../miniprogram_npm/thorui/loadmore/loadmore",
+    "van-popup":"../../../components/dist/popup/index",
+    "van-icon": "../../../components/dist/icon/index"
+  }
+}
+
+

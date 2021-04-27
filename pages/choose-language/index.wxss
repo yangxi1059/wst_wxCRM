@@ -1,0 +1,48 @@
+.index-page{
+    padding-top: 16rpx;
+    background: #fff;
+}
+.white-box {
+    width: 100%;
+    background-color: #fff;
+    height: 122rpx;
+}
+
+.content-box {
+    width: 90%;
+    height: 122rpx;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.line {
+    width: 100%;
+    height: 1rpx;
+    background-color: rgb(185, 191, 202, 0.3);
+}
+
+.content-box text {
+    font-size: 30rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: rgba(54, 59, 62, 1);
+}
+
+.content-box image {
+    width: 34rpx;
+    height: 24rpx;
+    animation: myfirst 0.6s;
+}
+
+@keyframes myfirst {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

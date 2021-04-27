@@ -1,0 +1,28 @@
+<view class="index-page">
+    <view class="form">
+        <view class="info-line">
+            <text class="line-left">头像</text><image src="{{avatarUrl}}" class="line-right-img"></image>
+        </view>
+        <view class="info-line">
+            <text class="line-left">用户名</text>
+            <text class="line-right">{{nickName}}</text>
+        </view>
+        <view class="info-line">
+            <text class="line-left">性别</text>
+            <text class="line-right">{{gender}}</text>
+        </view>
+
+        <view class="info-line" wx:if="{{birthday != ''}}">
+            <text class="line-left">登录时间</text>
+            <text class="line-right">{{birthday}}</text>
+        </view>
+
+        <view class="info-line" wx:if="{{birthday != ''}}" bindtap="copy" data-text="{{refCode}}">
+            <text class="line-left">Ref Code</text>
+            <text class="line-right">{{refCode}}</text>
+        </view>
+     
+        <view class="quit" bindtap="loginout">{{nickName == '未知' ? '已退出登录':'退出登录'}}</view>
+    </view>
+    
+</view>

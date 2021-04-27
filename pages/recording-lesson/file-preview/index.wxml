@@ -1,0 +1,25 @@
+<view class="index-page" wx:if="{{!isLoading}}">
+    <!-- <canvas-watermark></canvas-watermark> -->
+    <swiper easing-function="linear" style="width: 100%;height: {{windowHeight}}px;" current="{{currentPage}}" bindchange="onChange">
+        <block wx:for="{{imgSrc}}" wx:key="key">
+            <swiper-item>
+                <van-image lazy-load="true" fit="widthFix" width="750rpx" use-loading-slot src="{{item}}" bindtap="previewImage">
+                    <van-loading slot="loading" type="spinner" size="20" vertical />
+                </van-image>
+            </swiper-item>
+        </block>
+    </swiper>
+    <view class="current-page">{{currentPage +1}}/{{docPageCount}}</view>
+    <view class="switch-page">
+        <view class="left-button" bindtap="previousPage">
+            <van-icon name="arrow-left" color="#ffffff" />
+        </view>
+        <view class="right-button" bindtap="nextPage">
+            <van-icon name="arrow" color="#ffffff" />
+        </view>
+    </view>
+</view>
+
+<view class="loading-box" wx:else>
+    <van-loading size="24px" vertical type="spinner">Loading...</van-loading>
+</view>

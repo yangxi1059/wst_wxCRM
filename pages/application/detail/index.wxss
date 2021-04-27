@@ -1,0 +1,207 @@
+page {
+    background-color: #F5F6F7;
+}
+
+.index-page {
+    padding-bottom: 180rpx;
+}
+
+.apply-box {
+    width: 100%;
+    background-color: #fff;
+    padding-bottom: 30rpx;
+}
+
+.apply-user {
+    width: 690rpx;
+    padding: 35rpx 0rpx;
+    margin: 0 auto;
+    border-bottom: 1rpx solid rgb(223, 223, 223);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.apply-user image {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 8rpx;
+    margin-right: 20rpx;
+}
+
+.apply-user text {
+    font-size: 28rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+}
+
+.apply-status {
+    width: fit-content;
+    padding: 2rpx 4rpx;
+    margin-left: 10rpx;
+    border-radius: 4rpx;
+    font-size: 20rpx;
+}
+
+.apply-info {
+    width: 690rpx;
+    margin: 0 auto;
+}
+
+.apply-info-text {
+    display: block;
+    padding: 30rpx 0rpx;
+    font-size: 30rpx;
+}
+
+.row-box {
+    margin-bottom: 28rpx;
+    padding-left: 30rpx;
+    display: flex;
+    flex-direction: row;
+    font-size: 28rpx;
+}
+
+.info-key {
+    color: #898989;
+    margin-right: 30rpx;
+}
+
+.check-box {
+    width: 100%;
+    margin-top: 30rpx;
+    background-color: #fff;
+    padding-bottom: 10rpx;
+}
+
+.check-box-text {
+    width: 690rpx;
+    margin: 0 auto;
+    display: block;
+    padding: 30rpx 0rpx;
+    font-size: 30rpx;
+}
+
+.man-box {
+    width: 660rpx;
+    margin: 0 auto 30rpx auto;
+    padding-left: 30rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    font-size: 28rpx;
+    color: #898989;
+}
+
+.man {
+    margin-left: 35rpx;
+    line-height: 54rpx;
+    color: #363B3E;
+    flex: 1;
+}
+
+.image-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-left: 53rpx;
+}
+
+.image-box {
+    margin-bottom: 25rpx;
+    width: fit-content;
+    padding: 7rpx 15rpx;
+    border: 1px solid #dcdfe6;
+    color: #606266;
+    font-size: 24rpx;
+    border-radius: 4rpx;
+}
+
+.info-value {
+    flex: 1;
+}
+
+.button-box {
+    width: 100%;
+    padding: 45rpx 0 70rpx 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    border-top: 1rpx solid #ccc;
+    font-size: 28rpx;
+    letter-spacing: 1rpx;
+
+}
+
+.button-box image {
+    width: 20rpx;
+    height: 20rpx;
+    margin-right: 20rpx;
+}
+
+
+.tui-modal-custom {
+    text-align: center;
+}
+
+.tui-tips-img {
+    width: 80rpx;
+    height: 80rpx;
+    margin-top: 20rpx;
+}
+
+.tui-modal-custom-text {
+    font-size: 28rpx;
+    color: #333;
+    padding: 20rpx 0;
+}
+
+.tui-prompt-title {
+    padding-bottom: 20rpx;
+    font-size: 34rpx;
+}
+
+.tui-modal-custom button {
+    height: 70rpx;
+    font-size: 26rpx;
+    line-height: 70rpx;
+    margin-top: 25rpx;
+
+}
+
+.wait {
+    border: 1px solid #409eff;
+    color: #409eff;
+}
+
+.cancel {
+    border: 1px solid #606266;
+    color: #606266;
+}
+
+.passed {
+    border: 1px solid #67c23a;
+    color: #67c23a;
+}
+
+.refuse {
+    border: 1px solid #f56c6c;
+    color: #f56c6c;
+}
+
+.wait-text{
+    color: #409eff;
+}
+
+.pass-text{
+    color: #67c23a;
+}
+
+.refuse-text{
+    color: #f56c6c;
+}

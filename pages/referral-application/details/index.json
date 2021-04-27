@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "van-checkbox": "/components/dist/checkbox/index",
+    "van-popup": "/components/dist/popup/index",
+    "van-loading": "/components/dist/loading/index",
+    "van-calendar": "/components/dist/calendar/index"
+  },
+  "navigationBarTitleText": "内推详情"
+}

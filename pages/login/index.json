@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "tui-tips": "../../miniprogram_npm/thorui/tips/tips"
+  },
+  "navigationBarBackgroundColor": "#F5F6F7",
+  "navigationBarTitleText": "WST CRM"
+}

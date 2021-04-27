@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "van-loading": "/components/dist/loading/index",
+    "van-icon": "/components/dist/icon/index",
+    "van-image": "/components/dist/image/index",
+    "canvas-watermark": "../../../components/watermark/watermark"
+  },
+  "navigationBarTitleText": " ",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#000000"
+}

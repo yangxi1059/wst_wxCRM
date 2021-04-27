@@ -1,0 +1,127 @@
+<view class="page {{showCopy? 'page-fixed' :''}}">
+    <view class="index-page">
+        <view class="row-box juli" bindtap="dropDownList">
+            <text class="row-title">货币类型<text>*</text></text>
+            <view class="row-right">
+                <input placeholder="请选择" value="{{vacateType}}" placeholder-class="placeholderStyle" disabled="true" />
+                <tui-icon name="arrowright" size="{{18}}" unit="rpx"></tui-icon>
+            </view>
+        </view>
+        <view class="row-box">
+            <text class="row-title">奖励金额<text>*</text></text>
+            <view class="row-right">
+                <input placeholder="请输入" placeholder-class="placeholderStyle" bindinput="getBonus" />
+                <tui-icon name="arrowright" size="{{18}}" unit="rpx"></tui-icon>
+            </view>
+        </view>
+        <view class="row-box">
+            <text class="row-title">系统汇率<text>*</text></text>
+            <view class="row-right">
+                <input style="margin-right: 30rpx;" value="7.5" disabled="true" placeholder-class="placeholderStyle" />
+            </view>
+        </view>
+        <view class="row-box juli">
+            <text class="row-title">推荐人<text>*</text></text>
+            <view class="row-right">
+                <input placeholder="请输入" placeholder-class="placeholderStyle" bindinput="getReferrer" />
+                <tui-icon name="arrowright" size="{{18}}" unit="rpx"></tui-icon>
+            </view>
+        </view>
+
+        <view class="column-box">
+            <text class="row-title">收款人账号详情<text>*</text></text>
+            <view class="row-right"><textarea placeholder-class="placeholderStyle" bindinput="getDetail" /></view>
+        </view>
+
+        <view class="column-box  juli">
+            <text class="row-title">备注</text>
+            <view class="row-right"><textarea placeholder-class="placeholderStyle" bindinput="getRemark" /></view>
+        </view>
+    <view class="column-box juli">
+        <text class="row-title">凭证、材料</text>
+        <view class="row-right" >
+                <block wx:for="{{imgList}}" wx:key="key">
+                    <view style="width: 150rpx;height: 150rpx;margin-right: 20rpx;position: relative;">
+                        <image style="width: 150rpx;height: 150rpx;margin-right: 20rpx;" src="{{item}}" mode="aspectFill" data-url="{{item}}" bindtap="toPreview">
+                            <view class="delete" catchtap="deleteImg" data-index="{{index}}">
+                                <tui-icon name="shut" size="10"  unit="rpx" color="#ffffff"></tui-icon>
+                            </view>
+                        </image>
+                    </view>        
+                </block>
+                <image style="width: 150rpx;height: 150rpx;" src="/images/upload-img.png" bindtap="afterRead"></image>
+        </view>
+    </view>
+
+    <view class="column-box juli no-border">
+        <text class="row-title">{{confirmor[0].confirmCol}}</text>
+        <view class="column-bottom" bindtap="addConfirm">
+            <textarea placeholder="请选择"  auto-height="true" maxlength="-1" value="{{result}}" placeholder-class="placeholderStyle" disabled="true" />
+            <tui-icon name="plus" size="{{18}}" unit="rpx"></tui-icon>
+        </view>
+    </view>
+    <view class="column-box no-border">
+        <text class="row-title">抄送人</text>
+        <view class="column-bottom" bindtap="addCopy">
+            <textarea placeholder="请选择" auto-height="true" maxlength="-1" value="{{results}}" placeholder-class="placeholderStyle" disabled="true" />
+            <tui-icon name="plus" size="{{18}}" unit="rpx"></tui-icon>
+        </view>
+    </view>
+
+    <!-- 加班类型 -->
+    <van-popup 
+        show="{{ typesShow }}" 
+        round 
+        position="bottom" 
+        custom-style="height: 30%" 
+        bind:close="onClose">
+        <van-picker show-toolbar  columns="{{ types }}" bind:cancel="onCancel" bind:confirm="onConfirm" />
+    </van-popup>
+
+    <van-popup 
+        show="{{ showConfirm }}" 
+        round position="bottom" 
+        custom-style="height: 20%" 
+        bind:close="onClose">
+        <van-checkbox-group value="{{ result }}" bind:change="onChanges">
+            <van-cell-group>
+              <van-cell
+                wx:for="{{ confirmor[0].confirmorArr }}"
+                wx:key="index"
+                title="{{ item.confirmorName }}"
+                value-class="value-class"
+                clickable
+                data-index="{{ index }}"
+                bind:click="toggle">
+                <van-checkbox
+                  catch:tap="noop"
+                  class="checkboxes-{{ index }}"
+                  name="{{ item.confirmorName }}"/>
+              </van-cell>
+            </van-cell-group>
+          </van-checkbox-group>
+    </van-popup>
+
+    <van-popup safe-area-inset-top="true" show="{{ showCopy }}" round position="bottom" custom-style="height: 50%" bind:close="onClose">
+        <van-checkbox-group value="{{ results }}" bind:change="onChanges_">
+            <van-cell-group>
+              <van-cell
+                wx:for="{{ copyTo }}"
+                wx:key="index"
+                title="{{ item.userName }}"
+                value-class="value-class"
+                clickable
+                data-index="{{ index }}"
+                bind:click="toggles">
+                <van-checkbox
+                  catch:tap="noop"
+                  class="checkbox-{{ index }}"
+                  name="{{ item.userName }}"/>
+              </van-cell>
+            </van-cell-group>
+          </van-checkbox-group>
+    </van-popup>
+    
+</view>
+<view class="but-ok" bindtap="submit">提交</view>
+</view>

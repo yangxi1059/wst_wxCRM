@@ -1,0 +1,58 @@
+<view class="index-page">
+    <view class="apply-box">
+        <view class="apply-user">
+            <image src="/images/default-img.png"></image>
+            <text>{{apply.createByName}}的{{apply.applyTypeName}}</text>
+            <view class="apply-status wait" wx:if="{{apply.applyStatus == 0}}" >待申请</view>
+            <view class="apply-status wait" wx:if="{{apply.applyStatus == 1}}" >待审核</view>
+            <view class="apply-status passed" wx:if="{{apply.applyStatus == 2}}">已通过</view>
+            <view class="apply-status refuse" wx:if="{{apply.applyStatus == 3}}">已拒绝</view>
+            <view class="apply-status cancel" wx:if="{{apply.applyStatus == 6}}">已取消</view>
+        </view>
+        <view class="apply-info">
+            <text class="apply-info-text">申请详情</text>
+            <view class="row-box" wx:for="{{content.text}}" wx:key="key">
+                <text class="info-key">{{item.label}}</text>
+                <text class="info-value">{{item.value}}</text>
+            </view>
+            <view class="row-box" wx:if="{{content.file.length > 0}}">
+                <text class="info-key">文件</text>
+                <view class="image-list">
+                    <block wx:for="{{content.file}}" wx:key="key">
+                        <view class="image-box" data-url="{{item.url}}" bindtap="toPreview">{{item.name}}</view>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="check-box" wx:if="{{approval.length > 0 || copyTo.length > 0}}">
+        <text class="check-box-text">审批流程</text>
+        <view class="man-box" wx:if="{{approval.length > 0}}">审核人：
+            <view class="man" >
+                <view wx:for="{{approval}}" wx:key="key"> {{item.approverName}}- 
+                    <text wx:if="{{item.approveStatus == 0}}" class="wait-text">待审核</text>
+                    <text wx:if="{{item.approveStatus == 1}}" class="pass-text">已通过</text>
+                    <text wx:if="{{item.approveStatus == 2}}" class="refuse-text">已拒绝 </text>{{item.msg ? '('+item.msg+')' : ''}}
+                </view>
+            </view>
+        </view>
+        <view class="man-box" wx:if="{{copyTo.length > 0}}">抄送人：
+            <view class="man" wx:for="{{copyTo}}" wx:key="key">
+                {{item.copyToName}}{{copyTo.length-1 != index ? '；':''}}
+            </view>
+        </view>
+    </view>
+
+    <tui-modal show="{{showPop}}" custom bind:cancel="hidePop">
+        <view class="tui-modal-custom">
+            <image src="/images/fail.png" class="tui-tips-img"></image>
+            <view class="tui-modal-custom-text">此操作将撤回该申请, 是否继续?</view>
+            <tui-button height="40rpx"  type="danger" shape="circle" bindclick="handleClick">确定</tui-button>
+        </view>
+    </tui-modal>
+</view>
+
+<view class="button-box" bindtap="revoke"  wx:if="{{apply.applyStatus == 1}}">
+    <image src="/images/chehui.png"></image>
+    <text>撤回</text>
+</view>

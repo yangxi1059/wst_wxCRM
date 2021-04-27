@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "van-image": "../../../components/dist/image/index"
+  },
+  "navigationBarBackgroundColor": "#F5F6F7"
+}

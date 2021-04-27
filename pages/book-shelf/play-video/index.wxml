@@ -1,0 +1,28 @@
+<view class="view-page">
+    <view class="page-content" >
+        <view class="video-box" wx:if="{{getPreviewUrlInfo.fileUrl}}">
+            <view style="position: relative;">
+                <video 
+                    title="{{bookObj.bookName}}" 
+                    src="{{getPreviewUrlInfo.fileUrl}}" 
+                    autoplay controls show-center-play-btn
+                    enable-play-gesture 
+                    vslide-gesture-in-fullscreen 
+                    show-screen-lock-button
+                    data-type="{{bookObj.fileType}}"
+                    bindfullscreenchange="fullscreen" 
+                    bindpause="playPause" 
+                    bindplay="playStart" 
+                    binderror="videoError"
+                    id="myVideo">
+                    <view class="marquee_box">
+                        <view class="marquee_text"
+                            style="{{orientation}}:{{marqueeDistance}}px;font-size: {{size}}px;top:{{randomHeight}}rpx">
+                            {{waterMarkText}}
+                        </view>
+                    </view>
+                </video>
+            </view>
+        </view>
+    </view>
+</view>

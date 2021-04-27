@@ -1,0 +1,46 @@
+<view class="index-page">
+    <view class="page-top">
+        <van-search custom-class="search-box" value="{{ value }}" shape="round" focus="{{true}}"
+            placeholder="请输入文件名" bind:change="onChange" bind:search="searchFile" />
+        <view class="cancel-box" bindtap="clickCancel">取消</view>
+    </view>
+    <view wx:if="{{bookList.length > 0}}" class="search-result">仅展示匹配度大于60%的文件，共 {{bookList.length}} 个</view>
+    <view class="book-column" wx:if="{{bookList.length > 0  }}">
+        <block wx:for="{{bookList}}" wx:key="key">
+            <view class="book-column-box">
+                <view class="column-item" data-bid="{{item.bookId}}" bindtap="showDetail">
+                    <van-image src="{{item.fileCover}}" width="48rpx" height="56rpx" fit="cover" lazy-load="{{true}}"
+                        custom-class="column-item-cover">
+                    </van-image>
+                    <view class="column-item-right">
+                        <view class="column-item-name">
+                            <rich-text type="text" nodes="{{item.bookNameLight}}"></rich-text>
+                        </view>
+                        <view class="column-item-path">文件大小：{{item.fileSizeNew}}</view>
+                    </view>
+                    <view class="icon-more-box" catchtap="showMore" data-fid="{{index}}">
+                        <image class="{{item.showMoreFlag ? 'transform' : 'notransform'}}" src="/images/arrow.png">
+                        </image>
+                    </view>
+                </view>
+                <!-- 文件的更多信息 -->
+                <view class="info-more" wx:if="{{item.showMoreFlag}}">
+                    <text>所在路径：</text>
+                    <view class="path-box">
+                        <view class="path-column" wx:for="{{item.filePathList}}" wx:key="key" wx:for-item="path">
+                            <view class="path-row" wx:for="{{path}}" wx:key="key" wx:for-item="filepath"
+                                wx:for-index="findex" data-sid="{{filepath.shelfId}}" bindtap="toShelf">
+                                {{filepath.shelfName}}<block wx:if="{{findex != path.length -1}}">/</block>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+
+    <view class="nodata" wx:if="{{ searchFlag && bookList.length <= 0 }}">
+        <image class="nodata-img" src="{{emptyImageUrl}}"></image>
+        <text class="nodata-text">无相关内容</text>
+    </view>
+</view>

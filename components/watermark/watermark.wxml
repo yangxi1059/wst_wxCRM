@@ -1,0 +1,5 @@
+<cover-view class="water-box">
+    <cover-view class="water_top" style="pointer-events: none;">
+        <cover-view class="water-text">{{watermarkText}}</cover-view>
+    </cover-view>
+</cover-view>

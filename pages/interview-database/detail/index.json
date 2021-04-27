@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "van-loading": "/components/dist/loading/index"
+  },
+  "navigationBarTitleText": "Detail"
+}

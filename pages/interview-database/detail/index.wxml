@@ -1,0 +1,94 @@
+<view class="index-page" wx:if="{{!isLoading}}">
+    <view class="company-img">
+        <image mode="aspectFit" src="{{interviewInfo.companyLogo}}" />
+    </view>
+
+    <view class="company-box">
+        <text class="company-name">{{interviewInfo.companyName}}</text>
+        <text class="company-jobFunction">{{interviewDatabasePage.jobFunction}}: {{interviewInfo.trackName}}</text>
+        <view class="company-difficulty">
+            <text>{{interviewDatabasePage.difficulty}}</text>
+            <view class="level-box">
+                <block wx:for="{{interviewInfo.difficultyLevel}}" wx:key="key">
+                    <image src="/images/level-fill (1).png"></image>
+                </block>
+                <block wx:for="{{5 - interviewInfo.difficultyLevel}}" wx:key="key">
+                    <image src="/images/level-fill (2).png"></image>
+                </block>
+            </view>
+        </view>
+    </view>
+
+    <view class="row-box">
+        <view class="row-item">
+            <text>{{interviewDatabasePage.location}}</text>
+            <view class="row-item-img">
+                <view class="red-line"></view>
+                {{interviewInfo.cityName}}
+            </view>
+        </view>
+        <view class="row-item">
+            <text>{{interviewDatabasePage.recruitingSeason}}</text>
+            <view class="row-item-img">
+                <view class="red-line"></view>
+                {{interviewInfo.applySeason}}
+            </view>
+        </view>
+    </view>
+    <view class="row-box">
+        <view class="row-item">
+            <text>{{interviewDatabasePage.interviewDate}}</text>
+            <view class="row-item-img">
+                <view class="red-line"></view>
+                {{interviewInfo.interviewDate}}
+            </view>
+        </view>
+        <view class="row-item">
+            <text>{{interviewDatabasePage.university}}</text>
+            <view class="row-item-img">
+                <view class="red-line"></view>
+                {{interviewInfo.schoolEngName}}
+            </view>
+        </view>
+    </view>
+
+    <view class="interview-content">
+        <view class="title">{{interviewInfo.applySeason}} {{interviewInfo.cityName}} {{interviewInfo.companyName}} Interview Database</view>
+        <text class="content">{{interviewInfo.story}}</text>
+    </view>
+
+    <block wx:if="{{interviewList.length > 0}}">
+        <view class="more-interview">
+            <text>相关面经</text><text bindtap="toAll">See All</text>
+        </view>
+        <view class="interview-list">
+            <view class="interview-box" wx:for="{{interviewList}}" wx:key="key" bindtap="toDetail"
+                data-pkid="{{item.pkId}}">
+                <view class="interview-info">
+                    <view class="interview-left">
+                        <image class="interview-image" mode="aspectFit" src="{{item.companyLogo}}"></image>
+                        <view class="interview-info-box">
+                            <view class="interview-name">{{item.companyName}}</view>
+                            <view class="interview-job">{{interviewDatabasePage.jobFunction}}：{{item.divisionName}}
+                            </view>
+                            <text class="interview-job">{{interviewDatabasePage.location}}：{{item.cityName}}</text>
+                            <view class="interview-difficulty">{{interviewDatabasePage.difficulty}}：
+                                <block wx:for="{{item.difficultyLevel}}" wx:key="index">
+                                    <image src="/images/level-fill (1).png"></image>
+                                </block>
+                                <block wx:for="{{5 - item.difficultyLevel}}" wx:key="index">
+                                    <image src="/images/level-fill (2).png"></image>
+                                </block>
+                            </view>
+                        </view>
+                    </view>
+                    <image class="interview-more" src="/images/content-more.png"></image>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>
+
+<view class="loading-box" wx:else>
+    <van-loading size="24px" vertical type="spinner">Loading...</van-loading>
+</view>
